@@ -1,0 +1,37 @@
+export default [
+  { trade: "Agriculture", abbr: "AGR" },
+  { trade: "Aerospace", abbr: "AES" },
+  { trade: "Automotive", abbr: "AUTO" },
+  { trade: "Banking", abbr: "BANK" },
+  { trade: "Biotechnology", abbr: "BIO" },
+  { trade: "Chemicals", abbr: "CHEM" },
+  { trade: "Construction", abbr: "CONSTR" },
+  { trade: "Consumer Goods", abbr: "CONS GD" },
+  { trade: "Defense", abbr: "DEF" },
+  { trade: "Education", abbr: "EDU" },
+  { trade: "Electronics", abbr: "ELEC" },
+  { trade: "Energy", abbr: "ENER" },
+    { trade: "Electricity", abbr: "ELEC" }, //More specific energy type
+    { trade: "Oil & Gas", abbr: "O&G" }, //More specific energy type
+    { trade: "Renewable Energy", abbr: "RENW" }, //More specific energy type
+  { trade: "Engineering", abbr: "ENG" },
+  { trade: "Entertainment", abbr: "ENT" },
+  { trade: "Financial Services", abbr: "FIN SERV" },
+  { trade: "Food & Beverage", abbr: "F&B" },
+  { trade: "Food Processing", abbr: "FOOD PROC" },
+  { trade: "Healthcare", abbr: "HC" },
+  { trade: "Information Technology (IT)", abbr: "IT" },
+  { trade: "Insurance", abbr: "INS" },
+  { trade: "Manufacturing", abbr: "MFG" },
+  { trade: "Materials", abbr: "MAT" },
+  { trade: "Media", abbr: "MEDIA" },
+  { trade: "Mining", abbr: "MIN" },
+  { trade: "Pharmaceuticals", abbr: "PHARMA" },
+  { trade: "Real Estate", abbr: "RE" },
+  { trade: "Retail", abbr: "RET" },
+  { trade: "Technology", abbr: "TECH" },
+  { trade: "Telecommunications", abbr: "TELCO" },
+  { trade: "Transportation", abbr: "TRANS" },
+  { trade: "Utilities", abbr: "UTIL" },
+  { trade: "Wholesale", abbr: "WHOLESALE" }
+];
