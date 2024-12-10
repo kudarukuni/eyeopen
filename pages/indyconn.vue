@@ -415,16 +415,39 @@
                       </v-flex>
                     </v-form>
                   </v-card>
-
-		  <v-btn color="primary" @click="prevStep(6)">Back</v-btn>
+		              <v-btn color="primary" @click="prevStep(6)">Back</v-btn>
                   <v-btn color="primary" outlined @click="saveStep(6)">Save</v-btn>
                   <v-btn color="green" big style="margin-left: 69%" @click="nextStep(6)">Next</v-btn>
                   <center><v-btn style="margin-top: 20px" @click="cancelled" outlined big color="red" :href="'/indyconn'">Cancel</v-btn></center>
-                </v-stepper-content>                
-
+                </v-stepper-content>
+                
                 <v-stepper-content step="7">
-                  <v-card class="mb-5" height="435px">
+                  <v-card class="mb-5" height="250px">
                     <v-form ref="form7">
+                      <center><p style="font-family: 'Gill Sans', Arial, Helvetica, sans-serif"> <font color="#fc5457">Please note: Completion of the following section requires specialized technical knowledge and expertise. This section is intended for qualified electricians or licensed contractors only. Applicants lacking the necessary qualifications should not attempt to complete this section. Incomplete or inaccurate submissions from unqualified individuals will not be considered.</font></p></center>
+                      <center><div class="row justify-content-center">
+                        <span class="col-3"></span>
+                        <span class="col-3 mb-1 mt-1 modern-checkbox">
+                          <input v-model="transfer" class="ms-1" type="radio" id="yes" value="yes" name="transfer-option"/>
+                          <label for="yes"><strong> <font color="#434343">Continue</font></strong><font color="#e96844">*</font></label>
+                        </span>
+                        <span class="col-3 ms-1 mb-1 mt-1 modern-checkbox">
+                          <input v-model="transfer" class="ms-1" type="radio" id="no" value="no" name="transfer-option" @click="nextStep(6)"/>
+                          <label for="no"><strong> <font color="#434343">Save & Finish Later</font></strong><font color="#e96844">*</font></label>
+                        </span>
+                        <span class="col-3"></span>
+                      </div></center>
+                    </v-form>
+                  </v-card>
+		              <v-btn color="primary" @click="prevStep(7)">Back</v-btn>
+                  <v-btn color="primary" outlined @click="saveStep(7)">Save</v-btn>
+                  <v-btn color="green" big style="margin-left: 69%" @click="nextStep(7)">Next</v-btn>
+                  <center><v-btn style="margin-top: 20px" @click="cancelled" outlined big color="red" :href="'/indyconn'">Cancel</v-btn></center>
+                </v-stepper-content>
+
+                <v-stepper-content step="8">
+                  <v-card class="mb-5" height="435px">
+                    <v-form ref="form8">
                       <v-flex xs12 d-flex>
                         <v-autocomplete sx6 :items="purpose" v-model="model.supply_type" label="Type Of Supply" dense
                           :rules="[v => !!v || 'Type of supply is required']" item-text="purpose" item-value="abbr"
@@ -461,15 +484,15 @@
                     </v-form>
                   </v-card>
 
-		  <v-btn color="primary" @click="prevStep(7)">Back</v-btn>
-                  <v-btn color="primary" outlined @click="saveStep(7)">Save</v-btn>
-                  <v-btn color="green" big style="margin-left: 69%" @click="nextStep(5)">Next</v-btn>
+		              <v-btn color="primary" @click="prevStep(8)">Back</v-btn>
+                  <v-btn color="primary" outlined @click="saveStep(8)">Save</v-btn>
+                  <v-btn color="green" big style="margin-left: 69%" @click="nextStep(8)">Next</v-btn>
                   <center><v-btn style="margin-top: 20px" @click="cancelled" outlined big color="red" :href="'/indyconn'">Cancel</v-btn></center>
                 </v-stepper-content>
 
-                <v-stepper-content step="8">
+                <v-stepper-content step="9">
                   <v-card class="mb-5" height="370px">
-                    <v-form ref="form8">
+                    <v-form ref="form9">
                       <v-flex xs12 d-flex>
                         <v-text-field sx6 name="input-1" label="Contractor's Name" color="primary" dense
                           v-model="model.contractor_name" id="testing" style="margin: 1em; width: 10px;" required :rules="[v => /^([a-zA-Z]+((['][a-zA-Z ])?[a-zA-Z]*)){2,30}$/.test(v) || 'Invalid Name']"></v-text-field>
@@ -483,22 +506,22 @@
                       </v-flex>
                       <v-flex xs12 d-flex>
                         <v-text-field sx6 v-model="model.contractor_contact2" label = "Landline Number" required default-country-code="ZW" valid-color="green" style="margin: 1em; width: 10px" dense @update="onUpdate2" maxlength="9" :rules="[(v) => v.length === 9 || 'Contractors Cell Number must be 9 characters long', (v) => !!v || 'Contractors Cell Number is required', (v) => v.startsWith('7') || 'Contractors Cell Number must start with 7',]"></v-text-field>
-			<v-text-field readonly sx6 dense v-model="model.contractor_contact1" label="Contractors Cellphone Number" required style="margin: 1em; width: 10px; text-align: left;" dense outlined @update="onUpdate2" maxlength="9" :rules="[(v) => (v && v.length === 9) || 'Cellphone Number must be 9 characters long', (v) => !!v || 'Cellphone Number is required', (v) => (v && v.startsWith('7')) || 'Cellphone Number must start with 7', (v) => v !== model.owner_contact2 || 'Cellphone Number Must Differ From Owner Landline Number']"></v-text-field>
+			                  <v-text-field readonly sx6 dense v-model="model.contractor_contact1" label="Contractors Cellphone Number" required style="margin: 1em; width: 10px; text-align: left;" dense outlined @update="onUpdate2" maxlength="9" :rules="[(v) => (v && v.length === 9) || 'Cellphone Number must be 9 characters long', (v) => !!v || 'Cellphone Number is required', (v) => (v && v.startsWith('7')) || 'Cellphone Number must start with 7', (v) => v !== model.owner_contact2 || 'Cellphone Number Must Differ From Owner Landline Number']"></v-text-field>
                       </v-flex>
                       <v-flex xs12 d-flex>
-			<v-text-field sx6 name="input-1" label="Contracting Firm's Address" color="primary" v-model="model.contractor_address" required id="testing" dense style="margin: 1em; width: 10px;" :rules="[v => !!v || 'Contracting Firm Address is required']"></v-text-field>
+			                  <v-text-field sx6 name="input-1" label="Contracting Firm's Address" color="primary" v-model="model.contractor_address" required id="testing" dense style="margin: 1em; width: 10px;" :rules="[v => !!v || 'Contracting Firm Address is required']"></v-text-field>
                       </v-flex>
                     </v-form>
                   </v-card>
-		  <v-btn color="primary" @click="prevStep(8)">Back</v-btn>
-                  <v-btn color="primary" outlined @click="saveStep(8)">Save</v-btn>
-                  <v-btn color="green" big style="margin-left: 69%" @click="nextStep(8)">Next</v-btn>
+		              <v-btn color="primary" @click="prevStep(9)">Back</v-btn>
+                  <v-btn color="primary" outlined @click="saveStep(9)">Save</v-btn>
+                  <v-btn color="green" big style="margin-left: 69%" @click="nextStep(9)">Next</v-btn>
                   <center><v-btn style="margin-top: 20px" @click="cancelled" outlined big color="red" :href="'/indyconn'">Cancel</v-btn></center>
                 </v-stepper-content>
 
-                <v-stepper-content step="9">
+                <v-stepper-content step="10">
                   <v-card class="mb-5" height="540px">
-                    <v-form ref="form9">
+                    <v-form ref="form10">
                       <div>
                         <v-simple-table height="540px">
                           <template>
@@ -602,16 +625,15 @@
                       </div>
                     </v-form>
                   </v-card>
-
-		  <v-btn color="primary" @click="prevStep(9)">Back</v-btn>
-                  <v-btn color="primary" outlined @click="saveStep(9)">Save</v-btn>
-                  <v-btn color="green" big style="margin-left: 69%" @click="nextStep(9)">Next</v-btn>
+		              <v-btn color="primary" @click="prevStep(10)">Back</v-btn>
+                  <v-btn color="primary" outlined @click="saveStep(10)">Save</v-btn>
+                  <v-btn color="green" big style="margin-left: 69%" @click="nextStep(10)">Next</v-btn>
                   <center><v-btn style="margin-top: 20px" @click="cancelled" outlined big color="red" :href="'/indyconn'">Cancel</v-btn></center>
                 </v-stepper-content>
 
-                <v-stepper-content step="10">
+                <v-stepper-content step="11">
                   <v-card class="mb-5" height="2000px">
-                    <v-form ref="form10">
+                    <v-form ref="form11">
                       <v-card-text>
                         <div ref="printContent" class="print-content">
                           <v-form class="form">
@@ -854,9 +876,9 @@
                       </v-card-text>
                     </v-form>
                   </v-card>
-		  <v-btn color="primary" @click="prevStep(10)">Back</v-btn>
-                  <v-btn color="primary" outlined @click="saveStep(10)">Save</v-btn>
-                  <v-btn color="green" big style="margin-left: 69%" @click="nextStep(10)">Next</v-btn>
+		              <v-btn color="primary" @click="prevStep(11)">Back</v-btn>
+                  <v-btn color="primary" outlined @click="saveStep(11)">Save</v-btn>
+                  <v-btn color="green" big style="margin-left: 69%" @click="nextStep(11)">Next</v-btn>
                   <center><v-btn style="margin-top: 20px" @click="cancelled" outlined big color="red" :href="'/indyconn'">Cancel</v-btn></center>
                 </v-stepper-content>
 
