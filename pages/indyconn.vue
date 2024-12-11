@@ -35,7 +35,7 @@
                 <v-stepper-step :complete="e1 > 9" editable step="9"></v-stepper-step>
                 <v-divider></v-divider>
                 <v-stepper-step :complete="e1 > 10" editable step="10"></v-stepper-step>
-		<v-divider></v-divider>
+		            <v-divider></v-divider>
                 <v-stepper-step :complete="e1 > 11" editable step="11" :class="{ 'unclickable': !clickable }"></v-stepper-step>
               </v-stepper-header>
 
@@ -224,7 +224,7 @@
                       </v-flex>
                     </v-form>
                   </v-card>
-		  <v-btn color="primary" @click="prevStep(3)">Back</v-btn>
+		              <v-btn color="primary" @click="prevStep(3)">Back</v-btn>
                   <v-btn color="primary" outlined @click="saveStep(3)">Save</v-btn>
                   <v-btn color="green" big style="margin-left: 69%" @click="nextStep(3)">Next</v-btn>
                   <center><v-btn style="margin-top: 20px" @click="cancelled" outlined big color="red" :href="'/indyconn'">Cancel</v-btn></center>
@@ -427,11 +427,11 @@
                   <v-card class="mb-5" height="250px">
                     <v-form ref="form7">
                       <center><p style="font-family: 'Gill Sans', Arial, Helvetica, sans-serif"><font color="blue"><h3>PLEASE NOTE</h3><br></font><font color="#fc5457"><h4>
-				Completion of the following section requires specialized technical<br>
-				knowledge and expertise. This section is intended for qualified electricians or <br>
-				licensed contractors only. Applicants lacking the necessary qualifications should <br>
-				not attempt to complete this section. Incomplete or inaccurate submissions from <br>
-				unqualified individuals will not be considered.</h4></font></p></center>
+                        Completion of the following section requires specialized technical<br>
+                        knowledge and expertise. This section is intended for qualified electricians or <br>
+                        licensed contractors only. Applicants lacking the necessary qualifications should <br>
+                        not attempt to complete this section. Incomplete or inaccurate submissions from <br>
+                        unqualified individuals will not be considered.</h4></font></p></center>
                       <center><div class="row justify-content-center">
                         <span class="col-3"></span>
                         <span class="col-3 mb-1 mt-1 modern-checkbox">
@@ -446,7 +446,7 @@
                       </div></center>
                     </v-form>
                   </v-card>
-		  <v-btn color="primary" @click="prevStep(7)">Back</v-btn>
+		              <v-btn color="primary" @click="prevStep(7)">Back</v-btn>
                   <!--<v-btn color="primary" outlined @click="saveStep(7)">Save</v-btn>-->
                   <!--<v-btn color="green" big style="margin-left: 69%" @click="nextStep(7)">Next</v-btn>-->
                   <center><v-btn style="margin-top: 20px" @click="cancelled" outlined big color="red" :href="'/indyconn'">Cancel</v-btn></center>
@@ -490,9 +490,9 @@
                       </v-flex>
                     </v-form>
                   </v-card>
-		  <v-btn color="primary" @click="prevStep(8)">Back</v-btn>
-                  <!--<v-btn color="primary" outlined @click="saveStep(8)">Save</v-btn>-->
-                  <!--<v-btn color="green" big style="margin-left: 69%" @click="nextStep(8)">Next</v-btn>-->
+		              <v-btn color="primary" @click="prevStep(8)">Back</v-btn>
+                  <v-btn color="primary" outlined @click="saveStep(8)">Save</v-btn>
+                  <v-btn color="green" big style="margin-left: 69%" @click="nextStep(8)">Next</v-btn>
                   <center><v-btn style="margin-top: 20px" @click="cancelled" outlined big color="red" :href="'/indyconn'">Cancel</v-btn></center>
                 </v-stepper-content>
 
