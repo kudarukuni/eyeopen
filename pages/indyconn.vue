@@ -34,7 +34,9 @@
                 <v-divider></v-divider>
                 <v-stepper-step :complete="e1 > 9" editable step="9"></v-stepper-step>
                 <v-divider></v-divider>
-                <v-stepper-step :complete="e1 >10" editable step="10" :class="{ 'unclickable': !clickable }"></v-stepper-step>
+                <v-stepper-step :complete="e1 > 10" editable step="10"></v-stepper-step>
+		<v-divider></v-divider>
+                <v-stepper-step :complete="e1 > 11" editable step="11" :class="{ 'unclickable': !clickable }"></v-stepper-step>
               </v-stepper-header>
 
               <v-stepper-items>
@@ -45,13 +47,13 @@
                       <center>
                         <div class="row justify-content-center">
                           <span class="col-3"></span>
-                          <span class="col-3 mb-2 mt-4 modern-checkbox">
+                          <span class="col-3 mb-1 mt-1 modern-checkbox">
                             <input v-model="custype" @click="nextStep(1)" class="ms-1" type="radio" id="indi" value="indi" name="transfer-option"/>
-                            <label for="indi"><strong> <font color="#434343">Individual</font></strong><font color="#e96844">*</font></label>
+                            <label for="indi"><strong> <font color="#434343">Individuals</font></strong><font color="#e96844">*</font></label>
                           </span>
-                          <span class="col-2 ms-1 mb-2 mt-4 modern-checkbox">
+                          <span class="col-3 ms-1 mb-1 mt-1 modern-checkbox">
                             <input v-model="custype" @click="nextStep(1)" class="ms-1" type="radio" id="org" value="org" name="transfer-option"/>
-                            <label for="org"><strong> <font color="#434343">Organisation</font></strong><font color="#e96844">*</font></label>
+                            <label for="org"><strong> <font color="#434343">Organisations</font></strong><font color="#e96844">*</font></label>
                           </span>
                           <span class="col-3"></span>
                         </div>
@@ -309,11 +311,11 @@
                       </center>
                       <center><div class="row justify-content-center">
                         <span class="col-3"></span>
-                        <span class="col-3 mb-2 mt-4 modern-checkbox">
+                        <span class="col-3 mb-1 mt-1 modern-checkbox">
                           <input v-model="employed" class="ms-1" type="radio" id="work" value="work" name="transfer-option"/>
                           <label for="yes"><strong> <font color="#434343">Yes</font></strong><font color="#e96844">*</font></label>
                         </span>
-                        <span class="col-2 ms-1 mb-2 mt-4 modern-checkbox">
+                        <span class="col-3 ms-1 mb-1 mt-1 modern-checkbox">
                           <input v-model="employed" @click="nextStep(5)" class="ms-1" type="radio" id="home" value="home" name="transfer-option"/>
                           <label for="no"><strong> <font color="#434343">No</font></strong><font color="#e96844">*</font></label>
                         </span>
@@ -347,16 +349,16 @@
                 </v-stepper-content>
 
                 <v-stepper-content step="6">
-                  <v-card class="mb-5" height="450px">
+                  <v-card class="mb-5" height="430px">
                     <v-form ref="form6">
                       <center><p style="font-family: 'Gill Sans', Arial, Helvetica, sans-serif"> <font color="#fc5457">Is This A Reconnection To Another Account?</font></p></center>
                       <center><div class="row justify-content-center">
                         <span class="col-3"></span>
-                        <span class="col-3 mb-2 mt-4 modern-checkbox">
+                        <span class="col-3 mb-1 mt-1 modern-checkbox">
                           <input v-model="transfer" class="ms-1" type="radio" id="yes" value="yes" name="transfer-option"/>
                           <label for="yes"><strong> <font color="#434343">Yes</font></strong><font color="#e96844">*</font></label>
                         </span>
-                        <span class="col-2 ms-1 mb-2 mt-4 modern-checkbox">
+                        <span class="col-2 ms-1 mb-1 mt-1 modern-checkbox">
                           <input v-model="transfer" class="ms-1" type="radio" id="no" value="no" name="transfer-option" @click="nextStep(6)"/>
                           <label for="no"><strong> <font color="#434343">No</font></strong><font color="#e96844">*</font></label>
                         </span>
@@ -424,29 +426,34 @@
                 <v-stepper-content step="7">
                   <v-card class="mb-5" height="250px">
                     <v-form ref="form7">
-                      <center><p style="font-family: 'Gill Sans', Arial, Helvetica, sans-serif"> <font color="#fc5457">Please note: Completion of the following section requires specialized technical knowledge and expertise. This section is intended for qualified electricians or licensed contractors only. Applicants lacking the necessary qualifications should not attempt to complete this section. Incomplete or inaccurate submissions from unqualified individuals will not be considered.</font></p></center>
+                      <center><p style="font-family: 'Gill Sans', Arial, Helvetica, sans-serif"><font color="blue"><h3>PLEASE NOTE</h3><br></font><font color="#fc5457"><h4>
+				Completion of the following section requires specialized technical<br>
+				knowledge and expertise. This section is intended for qualified electricians or <br>
+				licensed contractors only. Applicants lacking the necessary qualifications should <br>
+				not attempt to complete this section. Incomplete or inaccurate submissions from <br>
+				unqualified individuals will not be considered.</h4></font></p></center>
                       <center><div class="row justify-content-center">
                         <span class="col-3"></span>
                         <span class="col-3 mb-1 mt-1 modern-checkbox">
-                          <input v-model="transfer" class="ms-1" type="radio" id="yes" value="yes" name="transfer-option"/>
-                          <label for="yes"><strong> <font color="#434343">Continue</font></strong><font color="#e96844">*</font></label>
+                          <input v-model="complet" class="ms-1" type="radio" id="complete" value="complete" name="transfer-option" @click="nextStep(7)"/>
+                          <label for="complete"><strong> <font color="#434343">Continue</font></strong><font color="#e96844">*</font></label>
                         </span>
                         <span class="col-3 ms-1 mb-1 mt-1 modern-checkbox">
-                          <input v-model="transfer" class="ms-1" type="radio" id="no" value="no" name="transfer-option" @click="nextStep(6)"/>
-                          <label for="no"><strong> <font color="#434343">Save & Finish Later</font></strong><font color="#e96844">*</font></label>
+                          <input v-model="complet" class="ms-1" type="radio" id="later" value="later" name="transfer-option"/>
+                          <label for="no"><strong> <font color="#434343">Finish Later</font></strong><font color="#e96844">*</font></label>
                         </span>
                         <span class="col-3"></span>
                       </div></center>
                     </v-form>
                   </v-card>
-		              <v-btn color="primary" @click="prevStep(7)">Back</v-btn>
-                  <v-btn color="primary" outlined @click="saveStep(7)">Save</v-btn>
-                  <v-btn color="green" big style="margin-left: 69%" @click="nextStep(7)">Next</v-btn>
+		  <v-btn color="primary" @click="prevStep(7)">Back</v-btn>
+                  <!--<v-btn color="primary" outlined @click="saveStep(7)">Save</v-btn>-->
+                  <!--<v-btn color="green" big style="margin-left: 69%" @click="nextStep(7)">Next</v-btn>-->
                   <center><v-btn style="margin-top: 20px" @click="cancelled" outlined big color="red" :href="'/indyconn'">Cancel</v-btn></center>
                 </v-stepper-content>
 
                 <v-stepper-content step="8">
-                  <v-card class="mb-5" height="435px">
+                  <v-card class="mb-5" height="410px">
                     <v-form ref="form8">
                       <v-flex xs12 d-flex>
                         <v-autocomplete sx6 :items="purpose" v-model="model.supply_type" label="Type Of Supply" dense
@@ -471,22 +478,21 @@
                           v-model="model.main_switch_kva" id="testing" required :rules="[v => !!v || 'Proposed Main Switch KVA is required']"></v-text-field>
                       </v-flex>
                       <v-flex xs12 d-flex>
-                        <v-text-field sx6 name="input-1" label="Proposed Main Switch Amperes" color="primary"
+                        <v-text-field sx6 name="input-1" label="Proposed Main Switch Amperes" dense color="primary"
                           type="number" v-model="model.main_switch_amp" required id="testing" :rules="[v => !!v || 'Proposed Main Switch Amperes is required']"
                           style="margin: 1em; width: 10px;"></v-text-field>
-                        <v-text-field sx6 name="input-1" label="Proposed Main Switch OR" type="number" color="primary"
+                        <v-text-field sx6 name="input-1" label="Proposed Main Switch OR" type="number" dense color="primary"
                           v-model="model.main_switch_or" id="testing" style="margin: 1em; width: 10px;" required :rules="[v => !!v || 'Proposed Main Switch OR is required']"></v-text-field>
                       </v-flex>
                       <v-flex xs6 d-flex>
-                        <v-text-field sx6 name="cable_length" type="number" label="Meter Box to Pole Distance" color="primary"
+                        <v-text-field sx6 name="cable_length" type="number" dense label="Meter Box to Pole Distance" color="primary"
                           :maxlength="max" v-model="model.cable_length" style="margin: 1em; width: 10px;" required :rules="[(v) => !!v || 'Meter Box to Pole Distance is required',]"></v-text-field>
                       </v-flex>
                     </v-form>
                   </v-card>
-
-		              <v-btn color="primary" @click="prevStep(8)">Back</v-btn>
-                  <v-btn color="primary" outlined @click="saveStep(8)">Save</v-btn>
-                  <v-btn color="green" big style="margin-left: 69%" @click="nextStep(8)">Next</v-btn>
+		  <v-btn color="primary" @click="prevStep(8)">Back</v-btn>
+                  <!--<v-btn color="primary" outlined @click="saveStep(8)">Save</v-btn>-->
+                  <!--<v-btn color="green" big style="margin-left: 69%" @click="nextStep(8)">Next</v-btn>-->
                   <center><v-btn style="margin-top: 20px" @click="cancelled" outlined big color="red" :href="'/indyconn'">Cancel</v-btn></center>
                 </v-stepper-content>
 
@@ -962,8 +968,7 @@
       employed: false,
       rservice: false,
       newaccount: false,
-
-
+      complet: false,
       transfer: false,
       transfered: false,
 
@@ -1105,6 +1110,15 @@
           this.newaccount = 'disallow';
         } else {
           this.newaccount = null;
+        }
+      },
+      complet(newValue) {
+        if (newValue === 'complete') {
+          this.complet = 'complete';
+        } else if (newValue === 'later') {
+          this.complet = 'later';
+        } else {
+          this.complet = null;
         }
       }
     },
@@ -1617,3 +1631,4 @@
     display: flex;
   }
 </style>
+
