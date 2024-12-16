@@ -42,26 +42,26 @@
               <v-stepper-items>
                 <v-stepper-content step="1">
                   <v-card class="mb-5" height="350px">
-		    <v-form ref="form1" v-model="valid" lazy-validation @submit.prevent>
-		      <center><h5><p dense style="font-family: 'Gill Sans', Arial, Helvetica, sans-serif"><font color="primary">Enter Reference Number To Continue Where You Left</font></p></h5></center>
+                    <v-form ref="form1" v-model="valid" lazy-validation @submit.prevent>
+                      <center><h5><p dense style="font-family: 'Gill Sans', Arial, Helvetica, sans-serif"><font color="primary">Enter Reference Number To Continue Where You Left</font></p></h5></center>
                       <center>
                         <div class="row justify-content-center">
                           <span class="col-12 mb-1 mt-1 modern-checkbox">
                              <center>
                                 <v-flex xs12 sm5>
-			           <v-text-field dense color="primary" required outlined clearable label="Reference Number" :max-length="15" :rules="pjobRules" v-model="model.pjob" @keyup.enter="getPJob" id="testing"></v-text-field>
-			        </v-flex>
-                                <v-btn dense color="primary" @click="getJobDoc">Continue</v-btn>
-                             </center>
-			  </span>
+                                  <v-text-field dense color="primary" required outlined clearable label="Reference Number" :max-length="15" :rules="pjobRules" v-model="model.pjob" @keyup.enter="getPJob" id="testing"></v-text-field>
+                                  <v-btn dense color="primary" @click="getJobDoc">Continue</v-btn>
+                                </v-flex>
+                              </center>
+			                    </span>
                         </div>
                       </center>
-		      <center></br><h1><p style="font-family: 'Gill Sans', Arial, Helvetica, sans-serif"><font color="amber">OR</font></p></h1></br></center>
+		                  <center></br><h1><p style="font-family: 'Gill Sans', Arial, Helvetica, sans-serif"><font color="amber">OR</font></p></h1></br></center>
                       <center><h5><p dense style="font-family: 'Gill Sans', Arial, Helvetica, sans-serif"><font color="#fc5457">Please Choose Customer Type</font></p></h5></center>
                       <center>
                         <div class="row justify-content-center">
                           <span class="col-3"></span>
-			  <span class="col-3 mb-1 mt-1 modern-checkbox">
+			                    <span class="col-3 mb-1 mt-1 modern-checkbox">
                             <input v-model="custype" @click="nextStep(1)" class="ms-1" type="radio" id="indi" value="indi" name="transfer-option"/>
                             <label for="indi"><strong> <font color="#434343">Individuals</font></strong><font color="#e96844">*</font></label>
                           </span>
