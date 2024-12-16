@@ -47,12 +47,12 @@
                       <center>
                         <div class="row justify-content-center">
                           <span class="col-12 mb-1 mt-1 modern-checkbox">
-                             <center>
+                             
                                 <v-flex xs12 sm5>
                                   <v-text-field dense color="primary" required outlined clearable label="Reference Number" :max-length="15" :rules="pjobRules" v-model="model.pjob" @keyup.enter="getPJob" id="testing"></v-text-field>
                                   <v-btn dense color="primary" @click="getJobDoc">Continue</v-btn>
                                 </v-flex>
-                              </center>
+                              
 			                    </span>
                         </div>
                       </center>
