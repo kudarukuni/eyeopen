@@ -35,19 +35,33 @@
                 <v-stepper-step :complete="e1 > 9" editable step="9"></v-stepper-step>
                 <v-divider></v-divider>
                 <v-stepper-step :complete="e1 > 10" editable step="10"></v-stepper-step>
-		            <v-divider></v-divider>
+		<v-divider></v-divider>
                 <v-stepper-step :complete="e1 > 11" editable step="11" :class="{ 'unclickable': !clickable }"></v-stepper-step>
               </v-stepper-header>
 
               <v-stepper-items>
                 <v-stepper-content step="1">
-                  <v-card class="mb-5" height="250px">
-                    <v-form ref="form1">
-                      <center><h4><p dense style="font-family: 'Gill Sans', Arial, Helvetica, sans-serif"><font color="#fc5457"><marquee>Please Choose Customer Type</marquee></font></p></h4></center>
+                  <v-card class="mb-5" height="350px">
+		    <v-form ref="form1" v-model="valid" lazy-validation @submit.prevent>
+		      <center><h5><p dense style="font-family: 'Gill Sans', Arial, Helvetica, sans-serif"><font color="primary">Enter Reference Number To Continue Where You Left</font></p></h5></center>
+                      <center>
+                        <div class="row justify-content-center">
+                          <span class="col-12 mb-1 mt-1 modern-checkbox">
+                             <center>
+                                <v-flex xs12 sm5>
+			           <v-text-field dense color="primary" required outlined clearable label="Reference Number" :max-length="15" :rules="pjobRules" v-model="model.pjob" @keyup.enter="getPJob" id="testing"></v-text-field>
+			        </v-flex>
+                                <v-btn dense color="primary" @click="getJobDoc">Continue</v-btn>
+                             </center>
+			  </span>
+                        </div>
+                      </center>
+		      <center></br><h1><p style="font-family: 'Gill Sans', Arial, Helvetica, sans-serif"><font color="amber">OR</font></p></h1></br></center>
+                      <center><h5><p dense style="font-family: 'Gill Sans', Arial, Helvetica, sans-serif"><font color="#fc5457">Please Choose Customer Type</font></p></h5></center>
                       <center>
                         <div class="row justify-content-center">
                           <span class="col-3"></span>
-                          <span class="col-3 mb-1 mt-1 modern-checkbox">
+			  <span class="col-3 mb-1 mt-1 modern-checkbox">
                             <input v-model="custype" @click="nextStep(1)" class="ms-1" type="radio" id="indi" value="indi" name="transfer-option"/>
                             <label for="indi"><strong> <font color="#434343">Individuals</font></strong><font color="#e96844">*</font></label>
                           </span>
@@ -64,7 +78,7 @@
                 </v-stepper-content>
                 
                 <v-stepper-content step="2">
-                  <v-card class="mb-5" height="470px">
+                  <v-card class="mb-5" height="475px">
                     <v-form ref="form2">
                       <v-flex xs12 d-flex>
                         <v-autocomplete sx6 dense v-if="custype === 'indi'" :items="gender" v-model="model.gender" label="Title" required item-text="gender" item-value="abbr" class="input-group--focused" style="margin: 1em; width: 10px;" :rules="[(v) => !!v || 'Title is required']"></v-autocomplete>
@@ -125,7 +139,7 @@
                               <!--<v-text-field style="width: 75px; text-align: right;" name="owner_id_proof" type="text" autocomplete="off" v-model="model.owner_id_proof = item1.id" readonly :rules="[(v) => !!v || 'Owner ID Proof is required',]"></v-text-field>
                               <v-text-field style="width: 100px; color: red; margin-right: 10px; text-align: right;" class="text-field-transparent" flat name="originalName" type="text" autocomplete="off" :placeholder="item1.originalName" readonly></v-text-field><br/>-->
                             </div>
-                            <br/><a href="javascript:void(0)" @click="resetme1()" style="font-family: 'Gill Sans', Arial, Helvetica, sans-serif;"><p align="right">Made A Mistake ??</p></a>
+                            <br/><a href="javascript:void(0)" @click="resetme1()" style="font-family: 'Gill Sans', Arial, Helvetica, sans-serif;"><p align="right">Reupload Document</p></a>
                           </div>
                           <div v-if="isFailed1">
                             <h3 align="right" style="font-family: 'Gill Sans', Arial, Helvetica, sans-serif;"><font color="red">Failed To Upload Document !!</font> </h3>
@@ -179,7 +193,7 @@
                   </v-card>
                   <v-btn color="primary" @click="prevStep(2)">Back</v-btn>
                   <v-btn color="primary" outlined @click="saveStep(2)">Save</v-btn>
-                  <v-btn color="green" style="margin-left: 69%" @click="nextStep(2)">Next</v-btn>
+                  <v-btn color="green" style="margin-left: 69%" @click="combined">Next</v-btn>
                   <center><v-btn style="margin-top: 20px" @click="cancelo" :href="'/indyconn'" outlined big color="red">Cancel</v-btn></center>
                 </v-stepper-content>
 
@@ -225,7 +239,7 @@
                       </v-flex>
                     </v-form>
                   </v-card>
-            		  <v-btn color="primary" @click="prevStep(3)">Back</v-btn>
+                  <v-btn color="primary" @click="prevStep(3)">Back</v-btn>
                   <v-btn color="primary" outlined @click="saveStep(3)">Save</v-btn>
                   <v-btn color="green" big style="margin-left: 69%" @click="nextStep(3)">Next</v-btn>
                   <center><v-btn style="margin-top: 20px" @click="cancelled" outlined big color="red" :href="'/indyconn'">Cancel</v-btn></center>
@@ -1137,6 +1151,18 @@
         }
       },
 
+      combined() {
+	this.cancelo2();
+	this.saveStep(2);
+	this.nextStep(2);
+      },
+
+      cancelo2() {
+        if (window.confirm('Are you sure you want to cancel? This will take you back to the begining.')) {
+          window.location.href = '/indyconn';
+        }
+      },
+
       onUpdateContact1(value) {
         console.log('First phone number updated:', value)
       },
@@ -1451,9 +1477,9 @@
             }).then((response) => {
               this.isLoading = false;
               if (response.data != "" || response.data != null) {
-                this.success.push( "Your application has been successfully submitted. Your unique Application Number, " + response.data + ", has been assigned to you. You will need this reference token to access and continue your application at a later time. Please write it down and keep it in a safe place. ");
-                this.$router.push({ path: "/success2", query: { data: response.data },
-                });
+                //this.success.push( "Your application has been successfully submitted. Your unique Application Number, " + response.data + ", has been assigned to you. You will need this reference token to access and continue your application at a later time. Please write it down and keep it in a safe place. ");
+                //this.$router.push({ path: "/success2", query: { data: response.data }, });
+		this.showMessage2();
               } else {
                   this.showMessage();
                 }
