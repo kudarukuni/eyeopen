@@ -35,7 +35,7 @@
                 <v-stepper-step :complete="e1 > 9" editable step="9"></v-stepper-step>
                 <v-divider></v-divider>
                 <v-stepper-step :complete="e1 > 10" editable step="10"></v-stepper-step>
-		<v-divider></v-divider>
+		            <v-divider></v-divider>
                 <v-stepper-step :complete="e1 > 11" editable step="11" :class="{ 'unclickable': !clickable }"></v-stepper-step>
               </v-stepper-header>
 
@@ -121,7 +121,7 @@
                               <!--The hiding effect can be achived using this piece of code please keep me safe i cannt die -->
                               <!--<v-text-field style="width: 35px; color: red; margin-right: 435px; text-align: right;" class="text-field-transparent" flat name="originalName" type="text" autocomplete="off" :placeholder="item1.originalName" readonly></v-text-field><br/>-->
                               <v-text-field style="width: 400px; text-align: right;" name="originalName" type="text" autocomplete="off" readonly :placeholder="item1.originalName"></v-text-field>
-                              <v-text-field style="width: 1px; color: red; margin-right: 10px; text-align: right;" class="text-field-transparent" flat name="owner_id_proof" type="text" autocomplete="off" readonly :rules="[(v) => !!v || 'Owner ID Proof is required',]"></v-text-field><!--v-model="model.owner_id_proof = item1.id"-->
+                              <v-text-field style="width: 1px; color: red; margin-right: 10px; text-align: right;" class="text-field-transparent" flat v-model="model.owner_id_proof = item1.id" name="owner_id_proof" type="text" autocomplete="off" readonly :rules="[(v) => !!v || 'Owner ID Proof is required',]"></v-text-field>
                               <!--<v-text-field style="width: 75px; text-align: right;" name="owner_id_proof" type="text" autocomplete="off" v-model="model.owner_id_proof = item1.id" readonly :rules="[(v) => !!v || 'Owner ID Proof is required',]"></v-text-field>
                               <v-text-field style="width: 100px; color: red; margin-right: 10px; text-align: right;" class="text-field-transparent" flat name="originalName" type="text" autocomplete="off" :placeholder="item1.originalName" readonly></v-text-field><br/>-->
                             </div>
@@ -174,13 +174,12 @@
                             <pre><p><strong><b>Please upload PDF documents only and try again.<br/> If the problem persists please call #704 ZETDC Call Center</b></strong></p></pre>
                           </div>
                         </div>
-                      
                       </v-flex>
                     </v-form>
                   </v-card>
-		  <v-btn color="primary" @click="prevStep(2)">Back</v-btn>
-		  <v-btn color="primary" outlined @click="saveStep(2)">Save</v-btn>
-		  <v-btn color="green" style="margin-left: 69%" @click="nextStep(2)">Next</v-btn>
+                  <v-btn color="primary" @click="prevStep(2)">Back</v-btn>
+                  <v-btn color="primary" outlined @click="saveStep(2)">Save</v-btn>
+                  <v-btn color="green" style="margin-left: 69%" @click="nextStep(2)">Next</v-btn>
                   <center><v-btn style="margin-top: 20px" @click="cancelo" :href="'/indyconn'" outlined big color="red">Cancel</v-btn></center>
                 </v-stepper-content>
 
@@ -208,7 +207,7 @@
                       </v-flex>
                       <v-flex xs12 d-flex>                        
                         <v-select xs6 dense v-if="rservice === 'connect'" :items=sortStr() v-model="model.street" label="Farm/Street Name" item-text="nom_CALLE" item-value="cod_CALLE" required :rules="[v => !!v || 'Street  is required']" class="input-group--focused" style="margin: 1em; width: 10px;"></v-select>
-                        <v-text-field sx6 dense v-if="rservice === 'disconnect'" name="input-1" label="Physical Address" color="primary" v-model="model.physical_address" id="testing" style="margin: 1em; width: 10px;" :rules="[(v) => !!v || 'Physical Address is required',]"></v-text-field>
+                        <v-text-field sx6 dense v-if="rservice === 'disconnect'" name="input-1" label="Physical Address" color="primary" v-model="model.d_physical_address" id="testing" style="margin: 1em; width: 10px;" :rules="[(v) => !!v || 'Physical Address is required',]"></v-text-field>
                         <v-autocomplete dense sx6 v-if="rservice === 'connect'" :items="nonstarnd" v-model="model.nonstarnd" label="Application Type" :rules="[v => !!v || 'Application Type is required']" item-text="nonstarnd" item-value="abbr" class="input-group--focused" style="margin: 1em; width: 10px;" required></v-autocomplete>
                         <v-autocomplete dense sx6 v-if="rservice === 'disconnect'" :items="nonstarnd" v-model="model.nonstarnd" label="Application Type" :rules="[v => !!v || 'Application Type is required']" item-text="nonstarnd" item-value="abbr" class="input-group--focused" style="margin: 1em; width: 10px;" required></v-autocomplete>
                       </v-flex>
@@ -221,12 +220,12 @@
                       <v-flex xs12 d-flex>
                         <v-text-field xs6 dense v-if="rservice === 'connect'" name="duplicator" label="Extension" color="primary" :maxlength="max" v-model="model.duplicator" style="margin: 1em; width: 10px;" required @input="validateDoorNumber"></v-text-field>
                         <v-text-field xs6 dense v-if="rservice === 'disconnect'" name="duplicator" label="Extension" color="primary" :maxlength="max" v-model="model.duplicator" style="margin: 1em; width: 10px;" required @input="validateDoorNumber"></v-text-field>
-			<v-text-field sx6 v-if="rservice === 'connect'" name="input-1" type="email" label="Email Address" v-model="model.email" dense :rules="[v => /.+@.+\..+/.test(v) || 'E-mail must be valid']" color="primary" id="testing" style="margin: 1em; width: 10px;"></v-text-field>
-			<v-text-field sx6 v-if="rservice === 'disconnect'" name="input-1" type="email" label="Email Address" v-model="model.email" dense :rules="[v => /.+@.+\..+/.test(v) || 'E-mail must be valid']" color="primary" id="testing" style="margin: 1em; width: 10px;"></v-text-field>
+			                  <v-text-field sx6 v-if="rservice === 'connect'" name="input-1" type="email" label="Email Address" v-model="model.email" dense :rules="[v => /.+@.+\..+/.test(v) || 'E-mail must be valid']" color="primary" id="testing" style="margin: 1em; width: 10px;"></v-text-field>
+			                  <v-text-field sx6 v-if="rservice === 'disconnect'" name="input-1" type="email" label="Email Address" v-model="model.email" dense :rules="[v => /.+@.+\..+/.test(v) || 'E-mail must be valid']" color="primary" id="testing" style="margin: 1em; width: 10px;"></v-text-field>
                       </v-flex>
                     </v-form>
                   </v-card>
-		  <v-btn color="primary" @click="prevStep(3)">Back</v-btn>
+            		  <v-btn color="primary" @click="prevStep(3)">Back</v-btn>
                   <v-btn color="primary" outlined @click="saveStep(3)">Save</v-btn>
                   <v-btn color="green" big style="margin-left: 69%" @click="nextStep(3)">Next</v-btn>
                   <center><v-btn style="margin-top: 20px" @click="cancelled" outlined big color="red" :href="'/indyconn'">Cancel</v-btn></center>
@@ -297,9 +296,9 @@
                       </v-flex>
                     </v-form>
                   </v-card>
-		  <v-btn color="primary" @click="prevStep(3)">Back</v-btn>
-		  <v-btn color="primary" outlined v-if="custype === 'indi'" @click="saveStep(4)">Save</v-btn>
-		  <v-btn color="primary" outlined v-if="custype === 'org'" @click="saveStep(4)">Save</v-btn>
+                  <v-btn color="primary" @click="prevStep(3)">Back</v-btn>
+                  <v-btn color="primary" outlined v-if="custype === 'indi'" @click="saveStep(4)">Save</v-btn>
+                  <v-btn color="primary" outlined v-if="custype === 'org'" @click="saveStep(4)">Save</v-btn>
                   <v-btn color="green" big style="margin-left: 69%" v-if="custype === 'indi'" @click="nextStep(4)">Next</v-btn>
                   <v-btn color="green" big style="margin-left: 69%" v-if="custype === 'org'" @click="nextStep(4)">Next</v-btn>
                   <center><v-btn style="margin-top: 20px" outlined big color="red" :href="'/indyconn'">Cancel</v-btn></center>
@@ -343,8 +342,7 @@
                       </v-flex>
                     </v-form>
                   </v-card>
-
-		  <v-btn color="primary" @click="prevStep(5)">Back</v-btn>
+		              <v-btn color="primary" @click="prevStep(5)">Back</v-btn>
                   <v-btn color="primary" outlined @click="saveStep(5)">Save</v-btn>
                   <v-btn color="green" big style="margin-left: 69%" @click="nextStep(5)">Next</v-btn>
                   <center><v-btn style="margin-top: 20px" outlined big color="red" :href="'/indyconn'">Cancel</v-btn></center>
@@ -429,11 +427,11 @@
                   <v-card class="mb-5" height="250px">
                     <v-form ref="form7">
                       <center><p style="font-family: 'Gill Sans', Arial, Helvetica, sans-serif"><font color="black"><h3>PLEASE NOTE</h3><br></font><font color="#fc5457"><h4>
-				Completion of the following section requires specialized technical<br>
-				knowledge and expertise. This section is intended for qualified electricians or <br>
-				licensed contractors only. Applicants lacking the necessary qualifications should <br>
-				not attempt to complete this section. Incomplete or inaccurate submissions from <br>
-				unqualified individuals will not be considered.</h4></font></p></center>
+                        Completion of the following section requires specialized technical<br>
+                        knowledge and expertise. This section is intended for qualified electricians or <br>
+                        licensed contractors only. Applicants lacking the necessary qualifications should <br>
+                        not attempt to complete this section. Incomplete or inaccurate submissions from <br>
+                        unqualified individuals will not be considered.</h4></font></p></center>
                       <center><div class="row justify-content-center">
                         <span class="col-3"></span>
                         <span class="col-3 mb-1 mt-1 modern-checkbox">
@@ -448,7 +446,7 @@
                       </div></center>
                     </v-form>
                   </v-card>
-		  <v-btn color="primary" @click="prevStep(7)">Back</v-btn>
+		              <v-btn color="primary" @click="prevStep(7)">Back</v-btn>
                   <!--<v-btn color="primary" outlined @click="saveStep(7)">Save</v-btn>-->
                   <!--<v-btn color="green" big style="margin-left: 69%" @click="nextStep(7)">Next</v-btn>-->
                   <center><v-btn style="margin-top: 20px" @click="cancelled" outlined big color="red" :href="'/indyconn'">Cancel</v-btn></center>
@@ -491,7 +489,7 @@
                       </v-flex>
                     </v-form>
                   </v-card>
-		  <v-btn color="primary" @click="prevStep(8)">Back</v-btn>
+		              <v-btn color="primary" @click="prevStep(8)">Back</v-btn>
                   <v-btn color="primary" outlined @click="saveStep(8)">Save</v-btn>
                   <v-btn color="green" big style="margin-left: 69%" @click="nextStep(8)">Next</v-btn>
                   <center><v-btn style="margin-top: 20px" @click="cancelled" outlined big color="red" :href="'/indyconn'">Cancel</v-btn></center>
@@ -937,11 +935,13 @@
 
   export default {
     layout: "regauth",
+
     components: {
       VueRecaptcha,
       VuePhoneNumberInput,
       Loading,
     },
+
     data: () => ({
       clickable: false,
       load: false,
@@ -1019,6 +1019,7 @@
         transfer_reason2: "",//connection_reason
         transfer_address: "",//transfer to address
         nis_rad: "",//account number
+        d_physical_address: "", //disconnection address
         transfer_reason: "",//transfer reasons
         transfer_add_proof: "",//proof of rez to transfer to documents attached
         supply_type: "",//type of supply
@@ -1076,6 +1077,7 @@
       results: {},
       result: {},
     }),
+
     watch: {        
       custype(newValue) {
         if (newValue === 'indi') {
@@ -1086,6 +1088,7 @@
           this.custype = null;
         }
       },
+
       employed(newValue) {
         if (newValue === 'work') {
           this.employed = 'work';
@@ -1095,6 +1098,7 @@
           this.employed = null;
         }
       },
+
       rservice(newValue) {
         if (newValue === 'connect') {
           this.rservice = 'connect';
@@ -1104,6 +1108,7 @@
           this.rservice = null;
         }
       },
+
       newaccount(newValue) {
         if (newValue === 'allow') {
           this.newaccount = 'allow';
@@ -1113,6 +1118,7 @@
           this.newaccount = null;
         }
       },
+
       complet(newValue) {
         if (newValue === 'complete') {
           this.complet = 'complete';
@@ -1123,48 +1129,58 @@
         }
       }
     },
+
     methods: {
       cancelo() {
         if (window.confirm('Are you sure you want to cancel? This will take you back to the begining.')) {
           window.location.href = '/indyconn';
         }
       },
+
       onUpdateContact1(value) {
         console.log('First phone number updated:', value)
       },
+
       isValidLandlineNumber(value) {
         const landlineRegex = /^\d{3}\d{2}\d{4}$/;
           return landlineRegex.test(value);
       },
+
       onUpdateContact2(value) {
         console.log('Second phone number updated:', value)
       },
+
       updateModel() {
         this.model.postal_proof = this.uploadedFiles[0].id;
         this.model.owner_id_proof = this.uploadedFiles1[0].id;
         this.model.transfer_add_proof = this.uploadedFiles2[0].id;
         this.model.nok_id_proof = this.uploadedFiles3[0].id;
       },
+
       validateDoorNumber() {
         if (this.model.door_number < 0) {
          this.model.door_number = 0;
         }
       },
+
       sortFunc: function () {
         return this.towwns.slice().sort(function (a, b) {
           return a.nom_MUNIC > b.nom_MUNIC ? 1 : -1;
         });
       },
+
       sortSub: function () {
         return this.ssurbub.slice().sort(function (a, b) {
           return a.nom_LOCAL > b.nom_LOCAL ? 1 : -1;
         });
       },
+
       sortStr: function () {
         return this.sstreets.slice().sort(function (a, b) {
           return a.nom_CALLE > b.nom_CALLE ? 1 : -1;
         });
       },
+
       cancelled: function () {
         this.e1 = 1;
         this.$refs.form1.reset();
@@ -1176,6 +1192,7 @@
         this.$refs.form7.reset();
         this.$refs.form8.reset();
       },
+
       showMessage() {
         Swal.fire({
           title: 'Error',
@@ -1188,6 +1205,7 @@
           cancelButtonColor: "#d33",
         })
       },
+
       nextStep: function (e) {
         if (e == 1) {
           if (this.$refs.form1.validate()) {
@@ -1228,6 +1246,44 @@
           }
         }
       },
+
+      saveStep: function (e) {
+        if (e == 2) {
+          if (this.$refs.form2.validate()) {
+            this.register2();
+          }
+        } else if (e == 3) {
+          if (this.$refs.form3.validate()) {
+            this.e1 = e + 1;
+          }
+        } else if (e == 4) {
+          if (this.$refs.form4.validate()) {
+            this.e1 = e + 1;
+          }
+        } else if (e == 5) {
+          if (this.$refs.form5.validate()) {
+            this.e1 = e + 1;
+          }
+        } else if (e == 6) {
+          if (this.$refs.form6.validate()) {
+            this.e1 = e + 1;
+          }
+        } else if (e == 7) {
+          if (this.$refs.form7.validate()) {
+            this.e1 = e + 1;
+          }
+        } else if (e == 8) {
+          if (this.$refs.form8.validate()) {
+            this.e1 = e + 1;
+          }
+        } else if (e == 9) {
+          if (this.$refs.form9.validate()) {
+            // this.e1 = e + 1;
+            this.register();
+          }
+        }
+      },
+
       prevStep: function (e) {
         if (e == 2) {
           this.e1 = e - 1;
@@ -1247,30 +1303,39 @@
           this.e1 = e - 1;
         }
       },
+
       onUpdate(payload) {
         this.results = payload;
       },
+
       onUp(payload) {
         this.result = payload;
       },
+
       onUpdate1(payload) {
         this.results1 = payload;
       },
+
       onUp1(payload) {
         this.result1 = payload;
       },
+
       onUpdate2(payload) {
         this.results2 = payload;
       },
+
       onUp2(payload) {
         this.result2 = payload;
       },
+
       onUpdate3(payload) {
         this.results3 = payload;
       },
+
       onUp3(payload) {
         this.result3 = payload;
       },
+
       surbubName(event) {
         this.$axios
           .request({
@@ -1288,6 +1353,7 @@
             console.log(e);
           });
       },
+
       streetName(event) {
         this.$axios
           .request({
@@ -1305,9 +1371,10 @@
             console.log(e);
           });
       },
+
       register() {
         this.errors = [];
-        this.success = [];        
+        this.success = [];
         if (this.$refs.form1.validate() & this.$refs.form2.validate() & this.$refs.form3.validate() & this.$refs.form4.validate() & this.$refs.form5.validate() & this.$refs.form6.validate() & this.$refs.form7.validate() & this.$refs.form8.validate() & this.$refs.form9.validate()) {
           if (this.results.isValid == true) {
             this.model.standnumber = this.model.standnumber.toUpperCase();
@@ -1318,10 +1385,10 @@
             this.model.nok_firstname = this.model.nok_firstname.toUpperCase();
             this.model.nok_surname = this.model.nok_surname.toUpperCase();
             this.model.nok_national_id = this.model.nok_national_id.toUpperCase();
-            this.model.contact1 = this.results.formattedNumber;          
+            this.model.contact1 = this.results.formattedNumber;
             this.isLoading = true;
             this.$axios.request({
-              url: "http://172.16.2.62:8182/api/newnetmet3",
+              url: "http://172.16.29.12:3017/api/newnetmet3",
               method: "post", 
               headers:{'Authorization': 'Bearer '+localStorage.getItem('token')},
               data: this.model,
@@ -1365,46 +1432,91 @@
           this.isLoading = false;
         }
       },
+
+      register2() {
+        this.errors = [];
+        this.success = [];
+        if (this.$refs.form2.validate()) {
+          this.model.gender = this.model.gender.toUpperCase();
+            this.model.surname = this.model.surname.toUpperCase();
+            this.model.customer_name = this.model.customer_name.toUpperCase();
+            this.model.document_id = this.model.document_id.toUpperCase();
+            this.model.contact1 = this.results.formattedNumber;
+            this.isLoading = true;
+            this.$axios.request({
+              url: "http://172.16.29.12:3017/api/newnetmet8",
+              method: "post", 
+              headers:{'Authorization': 'Bearer '+localStorage.getItem('token')},
+              data: this.model,
+            }).then((response) => {
+              this.isLoading = false;
+              if (response.data != "" || response.data != null) {
+                this.success.push( "Your application has been successfully submitted. Your unique Application Number, " + response.data + ", has been assigned to you. You will need this reference token to access and continue your application at a later time. Please write it down and keep it in a safe place. ");
+                this.$router.push({ path: "/success2", query: { data: response.data },
+                });
+              } else {
+                  this.showMessage();
+                }
+              }).catch((e) => {
+                this.isLoading = false;
+                this.showMessage();
+              });
+        } else {
+          if (!this.$refs.form2.validate()) {
+            this.e1 = 2;
+          }
+          this.isLoading = false;
+        }
+      },
+
       reset() {
         this.currentStatus = STATUS_INITIAL;
         this.uploadedFiles = [];
         this.uploadError = null;
       },
+
       reset1() {
         this.currentStatus1 = STATUS_INITIAL1;
         this.uploadedFiles1 = [];
         this.uploadError1 = null;
       },
+
       reset2() {
         this.currentStatus2 = STATUS_INITIAL2;
         this.uploadedFiles2 = [];
         this.uploadError2 = null;
       },
+
       reset3() {
         this.currentStatus3 = STATUS_INITIAL3;
         this.uploadedFiles3 = [];
         this.uploadError3 = null;
       },
+
       resetme() {
         this.currentStatus = STATUS_INITIAL;
         this.uploadedFiles = [];
         this.uploadError = null;
       },
+
       resetme1() {
         this.currentStatus1 = STATUS_INITIAL1;
         this.uploadedFiles1 = [];
         this.uploadError1 = null;
       },
+
       resetme2() {
         this.currentStatus2 = STATUS_INITIAL2;
         this.uploadedFiles2 = [];
         this.uploadError2 = null;
       },
+
       resetme3() {
         this.currentStatus3 = STATUS_INITIAL3;
         this.uploadedFiles3 = [];
         this.uploadError3 = null;
-      },      
+      },
+
       save(formData) {
         this.currentStatus = STATUS_SAVING;
         upload(formData)
@@ -1418,6 +1530,7 @@
             this.currentStatus = STATUS_FAILED;
           });
       },
+
       filesChange(fieldName, fileList) {
         const formData = new FormData();
         if (!fileList.length) return;
@@ -1426,6 +1539,7 @@
         });
         this.save(formData);
       },
+
       save1(formData1) {
         this.currentStatus1 = STATUS_SAVING1;
         upload1(formData1)
@@ -1439,6 +1553,7 @@
             this.currentStatus1 = STATUS_FAILED1;
           });
       },
+
       filesChange1(fieldName, fileList) {
         const formData1 = new FormData();
         if (!fileList.length) return;
@@ -1447,6 +1562,7 @@
         });
         this.save1(formData1);
       },
+
       save2(formData2) {
         this.currentStatus2 = STATUS_SAVING2;
         upload2(formData2)
@@ -1460,6 +1576,7 @@
             this.currentStatus2 = STATUS_FAILED2;
           });
       },
+
       filesChange2(fieldName, fileList) {
         const formData2 = new FormData();
         if (!fileList.length) return;
@@ -1468,6 +1585,7 @@
         });
         this.save2(formData2);
       },
+
       save3(formData3) {
         this.currentStatus3 = STATUS_SAVING3;
         upload3(formData3)
@@ -1481,6 +1599,7 @@
             this.currentStatus3 = STATUS_FAILED3;
           });
       },
+
       filesChange3(fieldName, fileList) {
         const formData3 = new FormData();
         if (!fileList.length) return;
@@ -1490,6 +1609,7 @@
         this.save3(formData3);
       },
     },
+
     created() {
       this.$axios
         .request({
@@ -1506,6 +1626,7 @@
           console.log(e);
         });
     },
+
     computed: {
       uploadmodel() {
         return {
@@ -1515,64 +1636,83 @@
           nok_id_proof: this.uploadedFiles3[0].id,
         };
       },
+
       computeLogo() {
         return "/logo.png";
       },
+      
       isInitial() {
         return this.currentStatus === STATUS_INITIAL;
       },
+
       isSaving() {
         return this.currentStatus === STATUS_SAVING;
       },
+
       isSuccess() {
         return this.currentStatus === STATUS_SUCCESS;
       },
+
       isFailed() {
         return this.currentStatus === STATUS_FAILED;
       },
+
       isInitial1() {
         return this.currentStatus1 === STATUS_INITIAL1;
       },
+
       isSaving1() {
         return this.currentStatus1 === STATUS_SAVING1;
       },
+
       isSuccess1() {
         return this.currentStatus1 === STATUS_SUCCESS1;
       },
+
       isFailed1() {
         return this.currentStatus1 === STATUS_FAILED1;
       },
+
       isInitial2() {
         return this.currentStatus2 === STATUS_INITIAL2;
       },
+
       isSaving2() {
         return this.currentStatus2 === STATUS_SAVING2;
       },
+
       isSuccess2() {
         return this.currentStatus2 === STATUS_SUCCESS2;
       },
+
       isFailed2() {
         return this.currentStatus2 === STATUS_FAILED2;
       },
+
       isInitial3() {
         return this.currentStatus3 === STATUS_INITIAL3;
       },
+
       isSaving3() {
         return this.currentStatus3 === STATUS_SAVING3;
       },
+
       isSuccess3() {
         return this.currentStatus3 === STATUS_SUCCESS3;
       },
+
       isFailed3() {
         return this.currentStatus3 === STATUS_FAILED3;
       },
     },
+
     mounted() {
       this.reset();
       this.reset1();
       this.reset2();
       this.reset3();
     },
+
   };
 </script>
 
@@ -1632,4 +1772,3 @@
     display: flex;
   }
 </style>
-
