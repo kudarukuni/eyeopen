@@ -35,40 +35,55 @@
                 <v-stepper-step :complete="e1 > 9" editable step="9"></v-stepper-step>
                 <v-divider></v-divider>
                 <v-stepper-step :complete="e1 > 10" editable step="10"></v-stepper-step>
-		<v-divider></v-divider>
+		            <v-divider></v-divider>
                 <v-stepper-step :complete="e1 > 11" editable step="11" :class="{ 'unclickable': !clickable }"></v-stepper-step>
               </v-stepper-header>
 
               <v-stepper-items>
                 <v-stepper-content step="1">
-                  <v-card class="mb-5" height="350px">
-		    <v-form ref="form1" v-model="valid" lazy-validation @submit.prevent>
-		      <center><h5><p dense style="font-family: 'Gill Sans', Arial, Helvetica, sans-serif"><font color="primary">Enter Reference Number To Continue Where You Left:</font></p></h5></center>
-			<div class="row justify-content-center">
-			  <div class="col-auto d-flex align-items-center">
-			    <v-text-field dense color="primary" required outlined clearable label="Reference Number" :max-length="15" :rules="pjobRules" v-model="model.pjo$" class="mr-3" style="margin-left: 270px"></v-text-field>
-			    <v-btn dense color="primary" @click="getJobDoc"><v-icon light>mdi-magnify</v-icon></v-btn>
-			  </div>
-			</div>
-		      <center></br><h1><p style="font-family: 'Gill Sans', Arial, Helvetica, sans-serif"><font color="red">OR</font></p></h1></br></center>
-                      <center><h5><p dense style="font-family: 'Gill Sans', Arial, Helvetica, sans-serif"><font color="#3f51b5">Start A New Application By Chosing A Customer Type Below:</font></p></h5></center>
+                  <v-card class="mb-5" height="570px">
+                    <v-form ref="form1">
+                      <center>
+                        <p style="font-family: 'Gill Sans', Arial, Helvetica, sans-serif"><font color="#fc5457"><marquee>Is This A New Application ?</marquee></font></p>
+                      </center>
                       <center>
                         <div class="row justify-content-center">
                           <span class="col-3"></span>
-			  <span class="col-3 mb-1 mt-1 modern-checkbox">
-                            <input v-model="custype" @click="nextStep(1)" class="ms-1" type="radio" id="indi" value="indi" name="transfer-option"/>
-                            <label for="indi"><strong> <font color="#434343">Individuals</font></strong><font color="#e96844">*</font></label>
+                          <span class="col-3 mb-2 mt-4 modern-checkbox">
+                            <input v-model="newapp" class="ms-1" type="radio" id="newa" value="newa" name="transfer-option"/>
+                            <label for="newa"><strong><font color="#434343">Yes</font></strong><font color="#e96844">*</font></label>
                           </span>
-                          <span class="col-3 ms-1 mb-1 mt-1 modern-checkbox">
-                            <input v-model="custype" @click="nextStep(1)" class="ms-1" type="radio" id="org" value="org" name="transfer-option"/>
-                            <label for="org"><strong> <font color="#434343">Organisations</font></strong><font color="#e96844">*</font></label>
+                          <span class="col-2 ms-1 mb-2 mt-4 modern-checkbox">
+                            <input v-model="newapp" class="ms-1" type="radio" id="conta" value="conta" name="transfer-option"/>
+                            <label for="conta"><strong> <font color="#434343">No</font></strong><font color="#e96844">*</font></label>
                           </span>
                           <span class="col-3"></span>
                         </div>
                       </center>
+
+                      <center>
+                      <center><h5><p dense style="font-family: 'Gill Sans', Arial, Helvetica, sans-serif"><font color="primary">Enter Reference Number To Continue Where You Left:</font></p></h5></center>
+                        <div class="row justify-content-center">
+                          <span v-if="newapp === 'newa'" class="col-3"></span>
+                          <span v-if="newapp === 'newa'" class="col-3 mb-2 mt-4 modern-checkbox">
+                            <input v-if="newapp === 'newa'"v-model="custype" @click="nextStep(1)" class="ms-1" type="radio" id="indi" value="indi" name="transfer-option"/>
+                            <label v-if="newapp === 'newa'" for="indi"><strong> <font color="#434343">Individual</font></strong><font color="#e96844">*</font></label>
+                          </span>
+                          <span v-if="newapp === 'newa'" class="col-2 ms-1 mb-2 mt-4 modern-checkbox">
+                            <input v-if="newapp === 'newa'" v-model="custype" @click="nextStep(1)" class="ms-1" type="radio" id="org" value="org" name="transfer-option"/>
+                            <label v-if="newapp === 'newa'" for="org"><strong> <font color="#434343">Organisation</font></strong><font color="#e96844">*</font></label>
+                          </span>
+                          <span v-if="newapp === 'newa'" class="col-3"></span>
+
+                          <div v-if="newapp === 'conta'" class="col-auto d-flex align-items-center">
+                            <v-text-field v-if="newapp === 'conta'" dense color="primary" required outlined clearable label="Reference Number" :max-length="15" :rules="pjobRules" v-model="model.pjo$" class="mr-3" style="margin-left: 270px"></v-text-field>
+                            <v-btn v-if="newapp === 'conta'" dense color="primary" @click="getJobDoc"><v-icon light>mdi-magnify</v-icon></v-btn>
+                          </div>
+                        </div>
+                      </center>
                     </v-form>                    
                   </v-card>
-                  <center><v-btn style="margin-top: 20px" outlined big color="red" :href="'/indyconn'" @click="cancelo">Cancel</v-btn></center>
+                  <center><v-btn style="margin-top: 20px" outlined big color="red" :href="'/indyconn'">Cancel</v-btn></center>
                 </v-stepper-content>
                 
                 <v-stepper-content step="2">
@@ -980,6 +995,7 @@
       complet: false,
       transfer: false,
       transfered: false,
+      newapp: false,
 
       loading: false,
       visible: false,
@@ -1094,6 +1110,16 @@
           this.custype = 'org';
         } else {
           this.custype = null;
+        }
+      },
+
+      newapp(newValue) {
+        if (newValue === 'newa') {
+          this.newapp = 'newa';
+        } else if (newValue === 'conta') {
+          this.newapp = 'conta';
+        } else {
+          this.newapp = null;
         }
       },
 
