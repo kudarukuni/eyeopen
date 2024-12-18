@@ -35,55 +35,57 @@
                 <v-stepper-step :complete="e1 > 9" editable step="9"></v-stepper-step>
                 <v-divider></v-divider>
                 <v-stepper-step :complete="e1 > 10" editable step="10"></v-stepper-step>
-		            <v-divider></v-divider>
+                <v-divider></v-divider>
                 <v-stepper-step :complete="e1 > 11" editable step="11" :class="{ 'unclickable': !clickable }"></v-stepper-step>
               </v-stepper-header>
 
               <v-stepper-items>
                 <v-stepper-content step="1">
-                  <v-card class="mb-5" height="570px">
-                    <v-form ref="form1">
-                      <center>
-                        <p style="font-family: 'Gill Sans', Arial, Helvetica, sans-serif"><font color="#fc5457"><marquee>Is This A New Application ?</marquee></font></p>
-                      </center>
+                  <v-card class="mb-5" height="270px">
+                    <v-form ref="form1" v-model="valid" lazy-validation @submit.prevent>
+                      <center><h4><p dense style="font-family: 'Gill Sans', Arial, Helvetica, sans-serif"><font color="primary">Would you like to start a new application or continue with an existing one ?</font></p></h4></center>
                       <center>
                         <div class="row justify-content-center">
                           <span class="col-3"></span>
-                          <span class="col-3 mb-2 mt-4 modern-checkbox">
-                            <input v-model="newapp" class="ms-1" type="radio" id="newa" value="newa" name="transfer-option"/>
-                            <label for="newa"><strong><font color="#434343">Yes</font></strong><font color="#e96844">*</font></label>
+			  <span class="col-3 mb-1 mt-1 modern-checkbox">
+                            <input v-model="newconapp" class="ms-1" type="radio" id="newa" value="newa" name="transfer-option"/>
+                            <label for="newa"><strong> <font color="#434343">New Application</font></strong><font color="#e96844">*</font></label>
                           </span>
-                          <span class="col-2 ms-1 mb-2 mt-4 modern-checkbox">
-                            <input v-model="newapp" class="ms-1" type="radio" id="conta" value="conta" name="transfer-option"/>
-                            <label for="conta"><strong> <font color="#434343">No</font></strong><font color="#e96844">*</font></label>
+                          <span class="col-3 ms-1 mb-1 mt-1 modern-checkbox">
+                            <input v-model="newconapp" class="ms-1" type="radio" id="conta" value="conta" name="transfer-option"/>
+                            <label for="conta"><strong> <font color="#434343">Continue Application</font></strong><font color="#e96844">*</font></label>
                           </span>
                           <span class="col-3"></span>
                         </div>
-                      </center>
+                      </center><br><br><br>
 
-                      <center>
-                      <center><h5><p dense style="font-family: 'Gill Sans', Arial, Helvetica, sans-serif"><font color="primary">Enter Reference Number To Continue Where You Left:</font></p></h5></center>
-                        <div class="row justify-content-center">
-                          <span v-if="newapp === 'newa'" class="col-3"></span>
-                          <span v-if="newapp === 'newa'" class="col-3 mb-2 mt-4 modern-checkbox">
-                            <input v-if="newapp === 'newa'"v-model="custype" @click="nextStep(1)" class="ms-1" type="radio" id="indi" value="indi" name="transfer-option"/>
-                            <label v-if="newapp === 'newa'" for="indi"><strong> <font color="#434343">Individual</font></strong><font color="#e96844">*</font></label>
+                      <center v-if="newconapp === 'conta'"><h4 v-if="newconapp === 'conta'"><p v-if="newconapp === 'conta'" dense style="font-family: 'Gill Sans', Arial, Helvetica, sans-serif"><font v-if="newconapp === 'conta'" color="#fc5457">Enter Reference Number To Continue Where You Left:</font></p></h4></center>
+                      <div v-if="newconapp === 'conta'" class="row justify-content-center">
+                        <div v-if="newconapp === 'conta'" class="col-auto d-flex align-items-center">
+                          <v-text-field v-if="newconapp === 'conta'" dense color="primary" required outlined clearable label="Reference Number" :max-length="15" :rules="pjobRules" v-model="model.pjo$" class="mr-3" style="margin-left: 270px"></v-text-field>
+                          <v-btn v-if="newconapp === 'conta'" dense color="primary" @click="getJobDoc"><v-icon v-if="newconapp === 'conta'" light>mdi-magnify</v-icon></v-btn>
+                        </div>
+                      </div>
+		                  
+                      <center v-if="newconapp === 'newa'"><h4 v-if="newconapp === 'newa'"><p v-if="newconapp === 'newa'" dense style="font-family: 'Gill Sans', Arial, Helvetica, sans-serif"><font v-if="newconapp === 'newa'" color="#fc5457">Please Choose A Customer Type:</font></p></h4></center>
+                      <center v-if="newconapp === 'newa'">
+                        <div v-if="newconapp === 'newa'" class="row justify-content-center">
+                          <span v-if="newconapp === 'newa'" class="col-3"></span>
+			  <span v-if="newconapp === 'newa'" class="col-3 mb-1 mt-1 modern-checkbox">
+                            <input v-if="newconapp === 'newa'" v-model="custype" @click="nextStep(1)" class="ms-1" type="radio" id="indi" value="indi" name="transfer-option"/>
+                            <label v-if="newconapp === 'newa'" for="indi"><strong> <font color="#434343">Individuals</font></strong><font color="#e96844">*</font></label>
                           </span>
-                          <span v-if="newapp === 'newa'" class="col-2 ms-1 mb-2 mt-4 modern-checkbox">
-                            <input v-if="newapp === 'newa'" v-model="custype" @click="nextStep(1)" class="ms-1" type="radio" id="org" value="org" name="transfer-option"/>
-                            <label v-if="newapp === 'newa'" for="org"><strong> <font color="#434343">Organisation</font></strong><font color="#e96844">*</font></label>
+                          <span v-if="newconapp === 'newa'" class="col-3 ms-1 mb-1 mt-1 modern-checkbox">
+                            <input v-if="newconapp === 'newa'" v-model="custype" @click="nextStep(1)" class="ms-1" type="radio" id="org" value="org" name="transfer-option"/>
+                            <label v-if="newconapp === 'newa'" for="org"><strong> <font color="#434343">Organisations</font></strong><font color="#e96844">*</font></label>
                           </span>
-                          <span v-if="newapp === 'newa'" class="col-3"></span>
-
-                          <div v-if="newapp === 'conta'" class="col-auto d-flex align-items-center">
-                            <v-text-field v-if="newapp === 'conta'" dense color="primary" required outlined clearable label="Reference Number" :max-length="15" :rules="pjobRules" v-model="model.pjo$" class="mr-3" style="margin-left: 270px"></v-text-field>
-                            <v-btn v-if="newapp === 'conta'" dense color="primary" @click="getJobDoc"><v-icon light>mdi-magnify</v-icon></v-btn>
-                          </div>
+                          <span v-if="newconapp === 'newa'" class="col-3"></span>
                         </div>
                       </center>
+
                     </v-form>                    
                   </v-card>
-                  <center><v-btn style="margin-top: 20px" outlined big color="red" :href="'/indyconn'">Cancel</v-btn></center>
+                  <center><v-btn style="margin-top: 20px" outlined big color="red" @click="cancelo2">Cancel</v-btn></center>
                 </v-stepper-content>
                 
                 <v-stepper-content step="2">
@@ -202,14 +204,14 @@
                   </v-card>
                   <v-btn color="primary" @click="prevStep(2)">Back</v-btn>
                   <v-btn color="primary" outlined @click="saveStep(2)">Save</v-btn>
-                  <v-btn color="green" style="margin-left: 69%" @click="combined">Next</v-btn>
-                  <center><v-btn style="margin-top: 20px" @click="cancelo" :href="'/indyconn'" outlined big color="red">Cancel</v-btn></center>
+                  <v-btn color="green" style="margin-left: 69%" @click="nextStep(2)">Next</v-btn>
+                  <center><v-btn style="margin-top: 20px" @click="cancelo2" outlined big color="red">Cancel</v-btn></center>
                 </v-stepper-content>
 
                 <v-stepper-content step="3">
                   <v-card class="mb-5" height="410px">
                     <v-form ref="form3">
-                      <center><h4><p dense style="font-family: 'Gill Sans', Arial, Helvetica, sans-serif"><font color="#fc5457"><marquee>Please choose your requested service</marquee></font></p></h4></center>
+                      <center><h4><p dense style="font-family: 'Gill Sans', Arial, Helvetica, sans-serif"><font color="#fc5457">Please choose your requested service</font></p></h4></center>
                       <center><div class="row justify-content-center">
                         <span class="col-3"></span>
                         <span class="col-3 mb-1 mt-1 modern-checkbox">
@@ -243,15 +245,15 @@
                       <v-flex xs12 d-flex>
                         <v-text-field xs6 dense v-if="rservice === 'connect'" name="duplicator" label="Extension" color="primary" :maxlength="max" v-model="model.duplicator" style="margin: 1em; width: 10px;" required @input="validateDoorNumber"></v-text-field>
                         <v-text-field xs6 dense v-if="rservice === 'disconnect'" name="duplicator" label="Extension" color="primary" :maxlength="max" v-model="model.duplicator" style="margin: 1em; width: 10px;" required @input="validateDoorNumber"></v-text-field>
-			                  <v-text-field sx6 v-if="rservice === 'connect'" name="input-1" type="email" label="Email Address" v-model="model.email" dense :rules="[v => /.+@.+\..+/.test(v) || 'E-mail must be valid']" color="primary" id="testing" style="margin: 1em; width: 10px;"></v-text-field>
-			                  <v-text-field sx6 v-if="rservice === 'disconnect'" name="input-1" type="email" label="Email Address" v-model="model.email" dense :rules="[v => /.+@.+\..+/.test(v) || 'E-mail must be valid']" color="primary" id="testing" style="margin: 1em; width: 10px;"></v-text-field>
+	                <v-text-field sx6 v-if="rservice === 'connect'" name="input-1" type="email" label="Email Address" v-model="model.email" dense :rules="[v => /.+@.+\..+/.test(v) || 'E-mail must be valid']" color="primary" id="testing" style="margin: 1em; width: 10px;"></v-text-field>
+			<v-text-field sx6 v-if="rservice === 'disconnect'" name="input-1" type="email" label="Email Address" v-model="model.email" dense :rules="[v => /.+@.+\..+/.test(v) || 'E-mail must be valid']" color="primary" id="testing" style="margin: 1em; width: 10px;"></v-text-field>
                       </v-flex>
                     </v-form>
                   </v-card>
                   <v-btn color="primary" @click="prevStep(3)">Back</v-btn>
                   <v-btn color="primary" outlined @click="saveStep(3)">Save</v-btn>
                   <v-btn color="green" big style="margin-left: 69%" @click="nextStep(3)">Next</v-btn>
-                  <center><v-btn style="margin-top: 20px" @click="cancelled" outlined big color="red" :href="'/indyconn'">Cancel</v-btn></center>
+                  <center><v-btn style="margin-top: 20px" @click="cancelo2" outlined big color="red">Cancel</v-btn></center>
                 </v-stepper-content>                
 
                 <v-stepper-content step="4">
@@ -330,8 +332,7 @@
                 <v-stepper-content step="5">
                   <v-card class="mb-5" height="530px">
                     <v-form ref="form5">
-                      <center>
-                        <h4><p style="font-family: 'Gill Sans', Arial, Helvetica, sans-serif"><font color="#fc5457"><marquee behavior=scroll direction="left" scrollamount="5">Please Tell Us If You Are Employed</marquee></font></p></h4>
+                      <center><h4><p dense style="font-family: 'Gill Sans', Arial, Helvetica, sans-serif"><font color="#fc5457">Please Tell Us If You Are Employed</font></p></h4>
                       </center>
                       <center><div class="row justify-content-center">
                         <span class="col-3"></span>
@@ -374,7 +375,7 @@
                 <v-stepper-content step="6">
                   <v-card class="mb-5" height="430px">
                     <v-form ref="form6">
-                      <center><p style="font-family: 'Gill Sans', Arial, Helvetica, sans-serif"> <font color="#fc5457">Is This A Reconnection To Another Account?</font></p></center>
+                      <center><h4><p style="font-family: 'Gill Sans', Arial, Helvetica, sans-serif"> <font color="#fc5457">Is This A Reconnection To Another Account?</font></p></h4></center>
                       <center><div class="row justify-content-center">
                         <span class="col-3"></span>
                         <span class="col-3 mb-1 mt-1 modern-checkbox">
@@ -987,7 +988,6 @@
       towwns: [],
       ssurbub: [],
       sstreets: [],
-
       custype: false,
       employed: false,
       rservice: false,
@@ -995,8 +995,7 @@
       complet: false,
       transfer: false,
       transfered: false,
-      newapp: false,
-
+      newconapp: false,
       loading: false,
       visible: false,
       isLoading: false,
@@ -1113,16 +1112,6 @@
         }
       },
 
-      newapp(newValue) {
-        if (newValue === 'newa') {
-          this.newapp = 'newa';
-        } else if (newValue === 'conta') {
-          this.newapp = 'conta';
-        } else {
-          this.newapp = null;
-        }
-      },
-
       employed(newValue) {
         if (newValue === 'work') {
           this.employed = 'work';
@@ -1153,6 +1142,16 @@
         }
       },
 
+      newconapp(newValue) {
+        if (newValue === 'newa') {
+          this.newconapp = 'newa';
+        } else if (newValue === 'conta') {
+          this.newconapp = 'conta';
+        } else {
+          this.newconapp = null;
+        }
+      },
+
       complet(newValue) {
         if (newValue === 'complete') {
           this.complet = 'complete';
@@ -1165,18 +1164,6 @@
     },
 
     methods: {
-      cancelo() {
-        if (window.confirm('Are you sure you want to cancel? This will take you back to the begining.')) {
-          window.location.href = '/indyconn';
-        }
-      },
-
-      combined() {
-	this.cancelo2();
-	this.saveStep(2);
-	this.nextStep(2);
-      },
-
       cancelo2() {
         if (window.confirm('Are you sure you want to cancel? This will take you back to the begining.')) {
           window.location.href = '/indyconn';
@@ -1227,18 +1214,6 @@
         });
       },
 
-      cancelled: function () {
-        this.e1 = 1;
-        this.$refs.form1.reset();
-        this.$refs.form2.reset();
-        this.$refs.form3.reset();
-        this.$refs.form4.reset();
-        this.$refs.form5.reset();
-        this.$refs.form6.reset();
-        this.$refs.form7.reset();
-        this.$refs.form8.reset();
-      },
-
       showMessage() {
         Swal.fire({
           title: 'Error',
@@ -1287,7 +1262,14 @@
           }
         } else if (e == 9) {
           if (this.$refs.form9.validate()) {
-            // this.e1 = e + 1;
+            this.e1 = e + 1;
+          }
+        } else if (e == 10) {
+          if (this.$refs.form10.validate()) {
+            this.e1 = e + 1;
+          }
+        } else if (e == 11) {
+          if (this.$refs.form11.validate()) {
             this.register();
           }
         }
@@ -1300,34 +1282,29 @@
           }
         } else if (e == 3) {
           if (this.$refs.form3.validate()) {
-            this.e1 = e + 1;
+            this.register3();
           }
         } else if (e == 4) {
           if (this.$refs.form4.validate()) {
-            this.e1 = e + 1;
+            this.register4();
           }
         } else if (e == 5) {
           if (this.$refs.form5.validate()) {
-            this.e1 = e + 1;
+            this.register5();
           }
         } else if (e == 6) {
           if (this.$refs.form6.validate()) {
-            this.e1 = e + 1;
-          }
-        } else if (e == 7) {
-          if (this.$refs.form7.validate()) {
-            this.e1 = e + 1;
+            this.register6();
           }
         } else if (e == 8) {
           if (this.$refs.form8.validate()) {
-            this.e1 = e + 1;
+            this.register8();
           }
         } else if (e == 9) {
           if (this.$refs.form9.validate()) {
-            // this.e1 = e + 1;
-            this.register();
+            this.register9();
           }
-        }
+        } 
       },
 
       prevStep: function (e) {
@@ -1347,7 +1324,11 @@
           this.e1 = e - 1;
         } else if (e == 9) {
           this.e1 = e - 1;
-        }
+        } else if (e == 10) {
+          this.e1 = e - 1;
+	} else if (e == 11) {
+          this.e1 = e - 1;
+	}
       },
 
       onUpdate(payload) {
@@ -1497,9 +1478,8 @@
             }).then((response) => {
               this.isLoading = false;
               if (response.data != "" || response.data != null) {
-                //this.success.push( "Your application has been successfully submitted. Your unique Application Number, " + response.data + ", has been assigned to you. You will need this reference token to access and continue your application at a later time. Please write it down and keep it in a safe place. ");
-                //this.$router.push({ path: "/success2", query: { data: response.data }, });
-		this.showMessage2();
+                this.success.push( "Your application has been saved successfully. Your unique Application Number, " + response.data + ", has been assigned to you. You will need this reference number to access and continue your application at a later time. Please write it down and keep it in a safe place. ");
+                this.$router.push({ path: "/success2", query: { data: response.data }, });
               } else {
                   this.showMessage();
                 }
@@ -1818,3 +1798,4 @@
     display: flex;
   }
 </style>
+
