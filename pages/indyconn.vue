@@ -776,7 +776,7 @@
                                 </div>
                           </v-form><br/><br/>
 
-                          <v-form class="form">
+                          <!--<v-form class="form">
                                 <div class="form-column">
                                   <v-text-field v-if="transfered === 'yess'" name="input-1" label="Name Of Employer" color="primary" v-model="model.name_of_employer" required readonly dense
                                     id="testing" style="margin: 0.5em;" ></v-text-field>
@@ -801,7 +801,7 @@
                                   <v-text-field v-if="transfered === 'yes'" name="input-1" label="Account Number" color="primary" v-model="model.nis_rad" required readonly dense
                                     id="testing" style="margin: 0.5em;"></v-text-field>
                                 </div>
-                          </v-form>
+                          </v-form>-->
 
                           <v-form class="form">
                                 <v-simple-table height="540px">
