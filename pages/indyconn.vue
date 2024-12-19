@@ -1300,49 +1300,27 @@
 
       nextStep: function (e) {
         if (e == 1) {
-          if (this.$refs.form1.validate()) {
-            this.e1 = e + 1;
-          }
+          this.e1 = e + 1;
         } else if (e == 2) {
-          if (this.$refs.form2.validate()) {
-            this.e1 = e + 1;
-          }
+          this.e1 = e + 1;
         } else if (e == 3) {
-          if (this.$refs.form3.validate()) {
-            this.e1 = e + 1;
-          }
+          this.e1 = e + 1;
         } else if (e == 4) {
-          if (this.$refs.form4.validate()) {
-            this.e1 = e + 1;
-          }
+          this.e1 = e + 1;
         } else if (e == 5) {
-          if (this.$refs.form5.validate()) {
-            this.e1 = e + 1;
-          }
+          this.e1 = e + 1;
         } else if (e == 6) {
-          if (this.$refs.form6.validate()) {
-            this.e1 = e + 1;
-          }
+          this.e1 = e + 1;
         } else if (e == 7) {
-          if (this.$refs.form7.validate()) {
-            this.e1 = e + 1;
-          }
+          this.e1 = e + 1;
         } else if (e == 8) {
-          if (this.$refs.form8.validate()) {
-            this.e1 = e + 1;
-          }
+          this.e1 = e + 1;
         } else if (e == 9) {
-          if (this.$refs.form9.validate()) {
-            this.e1 = e + 1;
-          }
+          this.e1 = e + 1;
         } else if (e == 10) {
-          if (this.$refs.form10.validate()) {
-            this.e1 = e + 1;
-          }
+          this.e1 = e + 1;
         } else if (e == 11) {
-          if (this.$refs.form11.validate()) {
-            this.register();
-          }
+          this.register();
         }
       },
 
@@ -1497,7 +1475,7 @@
       register() {
         this.errors = [];
         this.success = [];
-        if (this.$refs.form2.validate() & this.$refs.form4.validate() & this.$refs.form8.validate() & this.$refs.form9.validate() & this.$refs.form10.validate()) {
+        if (this.$refs.form10.validate()) {
           if (this.results.isValid == true) {
             this.model.standnumber = this.model.standnumber.toUpperCase();
             this.model.gender = this.model.gender.toUpperCase();
@@ -1532,24 +1510,8 @@
               this.showMessage();              
           }
         } else {
-          if (!this.$refs.form1.validate()) {
-            this.e1 = 1;
-          } else if (!this.$refs.form2.validate()) {
-            this.e1 = 2;
-          } else if (!this.$refs.form3.validate()) {
-            this.e1 = 3;
-          } else if (!this.$refs.form4.validate()) {
-            this.e1 = 4;
-          } else if (!this.$refs.form5.validate()) {
-            this.e1 = 5;
-          } else if (!this.$refs.form6.validate()) {
-            this.e1 = 6;
-          } else if (!this.$refs.form7.validate()) {
-            this.e1 = 7;
-          } else if (!this.$refs.form8.validate()) {
-            this.e1 = 8;
-          } else if (!this.$refs.form9.validate()) {
-            this.e1 = 9;
+          if (!this.$refs.form10.validate()) {
+            this.e1 = 11;
           }
           this.isLoading = false;
         }
