@@ -1279,11 +1279,11 @@
         });
       },
 
-      sortStr: function () {
+      /*sortStr: function () {
         return this.sstreets.slice().sort(function (a, b) {
           return a.nom_CALLE > b.nom_CALLE ? 1 : -1;
         });
-      },
+      },*/
 
       showMessage() {
         Swal.fire({
@@ -1476,7 +1476,7 @@
           });
       },
 
-      streetName(event) {
+      /*streetName(event) {
         this.$axios
           .request({
             url:
@@ -1492,7 +1492,7 @@
           .catch((e) => {
             console.log(e);
           });
-      },
+      },*/
 
       register() {
         this.errors = [];
