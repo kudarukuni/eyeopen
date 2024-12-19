@@ -700,7 +700,7 @@
                                 <div class="form-column">
                                   <v-text-field name="input-1" label="Other Phone Number" color="primary" v-model="model.owner_contact2" required readonly dense
                                     id="testing" style="margin: 0.5em;"></v-text-field>
-                                  <v-select xs6 :items="sortStr()" v-model="model.street" label="Street" item-text="nom_CALLE" item-value="cod_CALLE" required readonly dense :rules="[(v) => !!v || 'Street  is required']" class="input-group--focused" style="margin: 0.5em"></v-select>
+                                  <v-select xs6 v-model="model.street" label="Street" item-text="nom_CALLE" item-value="cod_CALLE" required readonly dense :rules="[(v) => !!v || 'Street  is required']" class="input-group--focused" style="margin: 0.5em"></v-select>
                                   <v-text-field name="input-1" label="Extension" color="primary" v-model="model.duplicator" required readonly dense
                                     id="testing" style="margin: 0.5em;"></v-text-field>
                                   <v-text-field name="input-1" label="Next Of Kin National ID" color="primary" v-model="model.nok_national_id" required readonly dense
