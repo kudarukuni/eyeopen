@@ -16,7 +16,7 @@
           <v-form ref="form">
             <v-stepper v-model="e1">
               <v-stepper-header>
-                <v-stepper-step :complete="e1 > 1" editable step="1"></v-stepper-step>
+                <v-stepper-step :complete="e1 > 1" editable step="1" :class="{ 'unclickable': !clickable }"></v-stepper-step>
                 <v-divider></v-divider>
                 <v-stepper-step :complete="e1 > 2" editable step="2"></v-stepper-step>
                 <v-divider></v-divider>
@@ -36,53 +36,56 @@
                 <v-divider></v-divider>
                 <v-stepper-step :complete="e1 > 10" editable step="10"></v-stepper-step>
                 <v-divider></v-divider>
-                <v-stepper-step :complete="e1 > 11" editable step="11" :class="{ 'unclickable': !clickable }"></v-stepper-step>
+                <v-stepper-step :complete="e1 > 11" editable step="11"></v-stepper-step>
               </v-stepper-header>
 
               <v-stepper-items>
                 <v-stepper-content step="1">
                   <v-card class="mb-5" height="270px">
-                    <v-form ref="form1" v-model="valid" lazy-validation @submit.prevent>
+                    <v-form ref="form1" lazy-validation @submit.prevent>
                       <center><h4><p dense style="font-family: 'Gill Sans', Arial, Helvetica, sans-serif"><font color="primary">Would you like to start a new application or continue with an existing one ?</font></p></h4></center>
                       <center>
                         <div class="row justify-content-center">
                           <span class="col-3"></span>
 			  <span class="col-3 mb-1 mt-1 modern-checkbox">
-                            <input v-model="newconapp" class="ms-1" type="radio" id="newa" value="newa" name="transfer-option"/>
+			    <input v-model="newconapp" class="ms-1" type="radio" id="newa" value="newa" name="newconapp"/>
                             <label for="newa"><strong> <font color="#434343">New Application</font></strong><font color="#e96844">*</font></label>
                           </span>
                           <span class="col-3 ms-1 mb-1 mt-1 modern-checkbox">
-                            <input v-model="newconapp" class="ms-1" type="radio" id="conta" value="conta" name="transfer-option"/>
+			    <input v-model="newconapp" class="ms-1" type="radio" id="conta" value="conta" name="newconapp2"/>
                             <label for="conta"><strong> <font color="#434343">Continue Application</font></strong><font color="#e96844">*</font></label>
-                          </span>
-                          <span class="col-3"></span>
+			  </span><br>
+			<span class="col-3"></span>
                         </div>
                       </center><br><br><br>
 
-                      <center v-if="newconapp === 'conta'"><h4 v-if="newconapp === 'conta'"><p v-if="newconapp === 'conta'" dense style="font-family: 'Gill Sans', Arial, Helvetica, sans-serif"><font v-if="newconapp === 'conta'" color="#fc5457">Enter Reference Number To Continue Where You Left:</font></p></h4></center>
+                      <center v-if="newconapp === 'conta'">
+		      <h4 v-if="newconapp === 'conta'">
+		      <p v-if="newconapp === 'conta'" dense style="font-family: 'Gill Sans', Arial, Helvetica, sans-serif"><font v-if="newconapp === 'conta'" color="#fc5457">Enter Reference Number To Continue Where You Left:</font></p></h4></center>
                       <div v-if="newconapp === 'conta'" class="row justify-content-center">
                         <div v-if="newconapp === 'conta'" class="col-auto d-flex align-items-center">
-                          <v-text-field v-if="newconapp === 'conta'" dense color="primary" required outlined clearable label="Reference Number" :max-length="15" :rules="pjobRules" v-model="model.pjo$" class="mr-3" style="margin-left: 270px"></v-text-field>
-                          <v-btn v-if="newconapp === 'conta'" dense color="primary" @click="getJobDoc"><v-icon v-if="newconapp === 'conta'" light>mdi-magnify</v-icon></v-btn>
+			  <v-text-field v-if="newconapp === 'conta'" dense color="primary" required outlined clearable label="Reference Number" :max-length="15" v-model="model.pjob" @keyup.enter="getApp" id="testing" class="mr-3" style="margin-left: 270px"></v-text-field>
+                          <v-btn v-if="newconapp === 'conta'" dense color="primary" @click="getAppAll"><v-icon v-if="newconapp === 'conta'" light>mdi-magnify</v-icon></v-btn>
                         </div>
                       </div>
-		                  
-                      <center v-if="newconapp === 'newa'"><h4 v-if="newconapp === 'newa'"><p v-if="newconapp === 'newa'" dense style="font-family: 'Gill Sans', Arial, Helvetica, sans-serif"><font v-if="newconapp === 'newa'" color="#fc5457">Please Choose A Customer Type:</font></p></h4></center>
+		      <center v-if="newconapp === 'newa'">
+		      <h4 v-if="newconapp === 'newa'">
+	              <p v-if="newconapp === 'newa'" dense style="font-family: 'Gill Sans', Arial, Helvetica, sans-serif">
+		      <font v-if="newconapp === 'newa'" color="#fc5457">Please Choose A Customer Type:</font></p></h4></center>
                       <center v-if="newconapp === 'newa'">
                         <div v-if="newconapp === 'newa'" class="row justify-content-center">
                           <span v-if="newconapp === 'newa'" class="col-3"></span>
 			  <span v-if="newconapp === 'newa'" class="col-3 mb-1 mt-1 modern-checkbox">
-                            <input v-if="newconapp === 'newa'" v-model="custype" @click="nextStep(1)" class="ms-1" type="radio" id="indi" value="indi" name="transfer-option"/>
-                            <label v-if="newconapp === 'newa'" for="indi"><strong> <font color="#434343">Individuals</font></strong><font color="#e96844">*</font></label>
+			   <input v-if="newconapp === 'newa'" v-model="custype" @click="nextStep(1)" class="ms-1" type="radio" id="indi" value="indi" name="custype"/>
+                           <label v-if="newconapp === 'newa'" for="indi"><strong> <font color="#434343">Individuals</font></strong><font color="#e96844">*</font></label>
                           </span>
                           <span v-if="newconapp === 'newa'" class="col-3 ms-1 mb-1 mt-1 modern-checkbox">
-                            <input v-if="newconapp === 'newa'" v-model="custype" @click="nextStep(1)" class="ms-1" type="radio" id="org" value="org" name="transfer-option"/>
+                            <input v-if="newconapp === 'newa'" v-model="custype" @click="nextStep(1)" class="ms-1" type="radio" id="org" value="org" name="custype2"/>
                             <label v-if="newconapp === 'newa'" for="org"><strong> <font color="#434343">Organisations</font></strong><font color="#e96844">*</font></label>
                           </span>
                           <span v-if="newconapp === 'newa'" class="col-3"></span>
                         </div>
                       </center>
-
                     </v-form>                    
                   </v-card>
                   <center><v-btn style="margin-top: 20px" outlined big color="red" @click="cancelo2">Cancel</v-btn></center>
@@ -186,8 +189,10 @@
                             <div v-for="(item1, index) in uploadedFiles1" style="display: flex;">
                               <!--The hiding effect can be achived using this piece of code please keep me safe i cannt die -->
                               <!--<v-text-field style="width: 35px; color: red; margin-right: 435px; text-align: right;" class="text-field-transparent" flat name="originalName" type="text" autocomplete="off" :placeholder="item1.originalName" readonly></v-text-field><br/>-->
-                              <v-text-field style="width: 400px; text-align: right;" name="originalName" type="text" autocomplete="off" readonly :placeholder="item1.originalName"></v-text-field>
+                 
+		              <v-text-field style="width: 400px; text-align: right;" name="originalName" type="text" autocomplete="off" readonly :placeholder="item1.originalName"></v-text-field>
                               <v-text-field style="width: 1px; color: red; margin-right: 10px; text-align: right;" class="text-field-transparent" flat v-model="model.owner_id_proof = item1.id" name="owner_id_proof" type="text" autocomplete="off" readonly :rules="[(v) => !!v || 'Owner ID Proof is required',]"></v-text-field>
+
                               <!--<v-text-field style="width: 75px; text-align: right;" name="owner_id_proof" type="text" autocomplete="off" v-model="model.owner_id_proof = item1.id" readonly :rules="[(v) => !!v || 'Owner ID Proof is required',]"></v-text-field>
                               <v-text-field style="width: 100px; color: red; margin-right: 10px; text-align: right;" class="text-field-transparent" flat name="originalName" type="text" autocomplete="off" :placeholder="item1.originalName" readonly></v-text-field><br/>-->
                             </div>
@@ -215,11 +220,11 @@
                       <center><div class="row justify-content-center">
                         <span class="col-3"></span>
                         <span class="col-3 mb-1 mt-1 modern-checkbox">
-                          <input v-model="rservice" class="ms-1" type="radio" id="connect" value="connect" name="transfer-option"/>
+                          <input v-model="rservice" class="ms-1" type="radio" id="connect" value="connect" name="rservice"/>
                           <label for="yes"><strong><font color="#434343">Connection</font></strong><font color="#e96844">*</font></label>
                         </span>
                         <span class="col-3 ms-1 mb-1 mt-1 modern-checkbox">
-                          <input v-model="rservice" class="ms-1" type="radio" id="disconnect" value="disconnect" name="transfer-option"/>
+                          <input v-model="rservice" class="ms-1" type="radio" id="disconnect" value="disconnect" name="rservice2"/>
                           <label for="no"><strong><font color="#434343">Disconnection</font></strong><font color="#e96844">*</font></label>
                         </span>
                         <span class="col-3"></span>
@@ -337,12 +342,12 @@
                       <center><div class="row justify-content-center">
                         <span class="col-3"></span>
                         <span class="col-3 mb-1 mt-1 modern-checkbox">
-                          <input v-model="employed" class="ms-1" type="radio" id="work" value="work" name="transfer-option"/>
+                          <input v-model="employed" class="ms-1" type="radio" id="work" value="work" name="employed"/>
                           <label for="yes"><strong> <font color="#434343">Yes</font></strong><font color="#e96844">*</font></label>
                         </span>
                         <span class="col-3 ms-1 mb-1 mt-1 modern-checkbox">
-                          <input v-model="employed" @click="nextStep(5)" class="ms-1" type="radio" id="home" value="home" name="transfer-option"/>
-                          <label for="no"><strong> <font color="#434343">No</font></strong><font color="#e96844">*</font></label>
+                         <input v-model="employed" @click="nextStep(5)" class="ms-1" type="radio" id="home" value="home" name="employed2"/>
+                         <label for="no"><strong> <font color="#434343">No</font></strong><font color="#e96844">*</font></label>
                         </span>
                         <span class="col-3"></span>
                       </div></center>
@@ -366,7 +371,7 @@
                       </v-flex>
                     </v-form>
                   </v-card>
-		              <v-btn color="primary" @click="prevStep(5)">Back</v-btn>
+		  <v-btn color="primary" @click="prevStep(5)">Back</v-btn>
                   <v-btn color="primary" outlined @click="saveStep(5)">Save</v-btn>
                   <v-btn color="green" big style="margin-left: 69%" @click="nextStep(5)">Next</v-btn>
                   <center><v-btn style="margin-top: 20px" outlined big color="red" :href="'/indyconn'">Cancel</v-btn></center>
@@ -379,28 +384,28 @@
                       <center><div class="row justify-content-center">
                         <span class="col-3"></span>
                         <span class="col-3 mb-1 mt-1 modern-checkbox">
-                          <input v-model="transfer" class="ms-1" type="radio" id="yes" value="yes" name="transfer-option"/>
+                          <input v-model="newaccount" class="ms-1" type="radio" id="allow" value="allow" name="newaccount"/>
                           <label for="yes"><strong> <font color="#434343">Yes</font></strong><font color="#e96844">*</font></label>
                         </span>
                         <span class="col-2 ms-1 mb-1 mt-1 modern-checkbox">
-                          <input v-model="transfer" class="ms-1" type="radio" id="no" value="no" name="transfer-option" @click="nextStep(6)"/>
+                          <input v-model="newaccount" class="ms-1" type="radio" id="disallow" value="disallow" name="transfer2" @click="nextStep(6)"/>
                           <label for="no"><strong> <font color="#434343">No</font></strong><font color="#e96844">*</font></label>
                         </span>
                         <span class="col-3"></span>
                       </div></center>
                       <v-flex xs12 d-flex>
                         <v-text-field sx6 name="input-1" placeholder="e.g 25 Samora Machel Ave, Harare" dense label="Address To Which Account Must Be Sent" color="primary"
-                          v-model="model.service_point_address" required id="testing" style="margin: 1em" v-if="transfer === 'yes'" :rules="[(v) => !!v || 'Address To Which Account Must Be Sent is required',]"
+                          v-model="model.service_point_address" required id="testing" style="margin: 1em" v-if="newaccount === 'allow'" :rules="[(v) => !!v || 'Address To Which Account Must Be Sent is required',]"
                         ></v-text-field>
-                        <v-text-field sx6 name="input-1" label="Old Account Number" color="primary" dense v-model="model.nis_rad" v-if="transfer === 'yes'" required
+                        <v-text-field sx6 name="input-1" label="Old Account Number" color="primary" dense v-model="model.nis_rad" v-if="newaccount === 'allow'" required
                           id="testing" style="margin: 1em" :rules="[(v) => !!v || 'Old Account Number is required',]"
                         ></v-text-field>
                       </v-flex>
                       <v-flex xs12 d-flex>
                         <v-text-field sx6 name="input-1" placeholder="Enter text (Limit: 254 characters)" dense maxlength="254" label="Reason For Reconnection" color="primary"
-                          v-model="model.transfer_reason" v-if="transfer === 'yes'" required id="testing" style="margin: 1em" :rules="[(v) => !!v || 'Please tell us why you need Connection',]"></v-text-field>                        
+                          v-model="model.transfer_reason" v-if="newaccount === 'allow'" required id="testing" style="margin: 1em" :rules="[(v) => !!v || 'Please tell us why you need Connection',]"></v-text-field>                        
                       </v-flex>
-                      <v-flex xs12 d-flex v-if="transfer === 'yes'">
+                      <v-flex xs12 d-flex v-if="newaccount === 'allow'">
                         <div class="container">
                           <form enctype="multipart/form-data" novalidate v-if="isInitial3 || isSaving3">
                             <h4 align="center" style="font-family: 'Gill Sans', Arial, Helvetica, sans-serif;">
@@ -441,7 +446,7 @@
                       </v-flex>
                     </v-form>
                   </v-card>
-		              <v-btn color="primary" @click="prevStep(6)">Back</v-btn>
+		  <v-btn color="primary" @click="prevStep(6)">Back</v-btn>
                   <v-btn color="primary" outlined @click="saveStep(6)">Save</v-btn>
                   <v-btn color="green" big style="margin-left: 69%" @click="nextStep(6)">Next</v-btn>
                   <center><v-btn style="margin-top: 20px" @click="cancelled" outlined big color="red" :href="'/indyconn'">Cancel</v-btn></center>
@@ -459,18 +464,18 @@
                       <center><div class="row justify-content-center">
                         <span class="col-3"></span>
                         <span class="col-3 mb-1 mt-1 modern-checkbox">
-                          <input v-model="complet" class="ms-1" type="radio" id="complete" value="complete" name="transfer-option" @click="nextStep(7)"/>
+                          <input v-model="complet" class="ms-1" type="radio" id="complete" value="complete" name="complet" @click="nextStep(7)"/>
                           <label for="complete"><strong> <font color="#434343">Continue</font></strong><font color="#e96844">*</font></label>
                         </span>
                         <span class="col-3 ms-1 mb-1 mt-1 modern-checkbox">
-                          <input v-model="complet" class="ms-1" type="radio" id="later" value="later" name="transfer-option"/>
+                          <input v-model="complet" class="ms-1" type="radio" id="later" value="later" name="complet2"/>
                           <label for="no"><strong> <font color="#434343">Finish Later</font></strong><font color="#e96844">*</font></label>
                         </span>
                         <span class="col-3"></span>
                       </div></center>
                     </v-form>
                   </v-card>
-		              <v-btn color="primary" @click="prevStep(7)">Back</v-btn>
+		  <v-btn color="primary" @click="prevStep(7)">Back</v-btn>
                   <!--<v-btn color="primary" outlined @click="saveStep(7)">Save</v-btn>-->
                   <!--<v-btn color="green" big style="margin-left: 69%" @click="nextStep(7)">Next</v-btn>-->
                   <center><v-btn style="margin-top: 20px" @click="cancelled" outlined big color="red" :href="'/indyconn'">Cancel</v-btn></center>
@@ -513,7 +518,7 @@
                       </v-flex>
                     </v-form>
                   </v-card>
-		              <v-btn color="primary" @click="prevStep(8)">Back</v-btn>
+		  <v-btn color="primary" @click="prevStep(8)">Back</v-btn>
                   <v-btn color="primary" outlined @click="saveStep(8)">Save</v-btn>
                   <v-btn color="green" big style="margin-left: 69%" @click="nextStep(8)">Next</v-btn>
                   <center><v-btn style="margin-top: 20px" @click="cancelled" outlined big color="red" :href="'/indyconn'">Cancel</v-btn></center>
@@ -535,14 +540,14 @@
                       </v-flex>
                       <v-flex xs12 d-flex>
                         <v-text-field sx6 v-model="model.contractor_contact2" label = "Landline Number" required default-country-code="ZW" valid-color="green" style="margin: 1em; width: 10px" dense @update="onUpdate2" maxlength="9" :rules="[(v) => v.length === 9 || 'Contractors Cell Number must be 9 characters long', (v) => !!v || 'Contractors Cell Number is required', (v) => v.startsWith('7') || 'Contractors Cell Number must start with 7',]"></v-text-field>
-			                  <v-text-field readonly sx6 dense v-model="model.contractor_contact1" label="Contractors Cellphone Number" required style="margin: 1em; width: 10px; text-align: left;" dense outlined @update="onUpdate2" maxlength="9" :rules="[(v) => (v && v.length === 9) || 'Cellphone Number must be 9 characters long', (v) => !!v || 'Cellphone Number is required', (v) => (v && v.startsWith('7')) || 'Cellphone Number must start with 7', (v) => v !== model.owner_contact2 || 'Cellphone Number Must Differ From Owner Landline Number']"></v-text-field>
+			<v-text-field readonly sx6 dense v-model="model.contractor_contact1" label="Contractors Cellphone Number" required style="margin: 1em; width: 10px; text-align: left;" dense outlined @update="onUpdate2" maxlength="9" :rules="[(v) => (v && v.length === 9) || 'Cellphone Number must be 9 characters long', (v) => !!v || 'Cellphone Number is required', (v) => (v && v.startsWith('7')) || 'Cellphone Number must start with 7', (v) => v !== model.owner_contact2 || 'Cellphone Number Must Differ From Owner Landline Number']"></v-text-field>
                       </v-flex>
                       <v-flex xs12 d-flex>
-			                  <v-text-field sx6 name="input-1" label="Contracting Firm's Address" color="primary" v-model="model.contractor_address" required id="testing" dense style="margin: 1em; width: 10px;" :rules="[v => !!v || 'Contracting Firm Address is required']"></v-text-field>
+			<v-text-field sx6 name="input-1" label="Contracting Firm's Address" color="primary" v-model="model.contractor_address" required id="testing" dense style="margin: 1em; width: 10px;" :rules="[v => !!v || 'Contracting Firm Address is required']"></v-text-field>
                       </v-flex>
                     </v-form>
                   </v-card>
-		              <v-btn color="primary" @click="prevStep(9)">Back</v-btn>
+		  <v-btn color="primary" @click="prevStep(9)">Back</v-btn>
                   <v-btn color="primary" outlined @click="saveStep(9)">Save</v-btn>
                   <v-btn color="green" big style="margin-left: 69%" @click="nextStep(9)">Next</v-btn>
                   <center><v-btn style="margin-top: 20px" @click="cancelled" outlined big color="red" :href="'/indyconn'">Cancel</v-btn></center>
@@ -774,30 +779,6 @@
                           </v-form><br/><br/>
 
                           <v-form class="form">
-                                <div class="form-column">
-                                  <v-text-field v-if="transfered === 'yess'" name="input-1" label="Name Of Employer" color="primary" v-model="model.name_of_employer" required readonly dense
-                                    id="testing" style="margin: 1em;" ></v-text-field>
-                                  <v-text-field v-if="transfered === 'yess'" name="input-1" label="Premise Owner" color="primary" v-model="model.premise_owner" required readonly dense
-                                    id="testing" style="margin: 1em;"></v-text-field>
-                                  <v-text-field v-if="transfered === 'yess'" name="input-1" label="Reason for Transfer Connection" color="primary" v-model="model.transfer_reason2" required readonly dense
-                                    id="testing" style="margin: 1em;"></v-text-field>
-                                  <v-text-field v-if="transfered === 'yes'" name="input-1" label="Reason for Reconnection" color="primary" v-model="model.transfer_reason" required readonly dense
-                                    id="testing" style="margin: 1em;"></v-text-field>
-                                </div>
-                                <div class="form-column">
-                                  <v-text-field v-if="transfered === 'yess'" name="input-1" label="Name Of Trade" color="primary" v-model="model.name_of_trade" required readonly dense
-                                    id="testing" style="margin: 1em;"></v-text-field>
-                                  <v-text-field v-if="transfered === 'yess'" name="input-1" label="Employer Contact" color="primary" v-model="model.employed_contact1" required readonly dense
-                                    id="testing" style="margin: 1em;" :rules="[(v) => v.length === 9 || 'Employer Phone Number must be 9 characters long', (v) => !!v || 'Employer Your Phone Number is required', (v) => v.startsWith('7') || 'Employer Phone Number must start with 7',]"></v-text-field>
-                                  <v-text-field v-if="transfered === 'yes'" name="input-1" label="Service Point Number" color="primary" v-model="model.service_point_address" required readonly dense
-                                    id="testing" style="margin: 1em;"></v-text-field>
-                                </div>
-                                <div class="form-column">
-                                  <v-text-field v-if="transfered === 'yess'" name="input-1" label="Roofing Material" color="primary" v-model="model.premise_owner_address" required readonly dense id="testing" style="margin: 1em;"></v-text-field>
-                                  <v-text-field v-if="transfered === 'yess'" name="input-1" label="Other Employer Contact" color="primary" v-model="model.employed_contact2" required readonly dense id="testing" style="margin: 1em;" :rules="[(v) => v.length === 9 || 'Employer Cell Number must be 9 characters long', (v) => !!v || 'Employer Your Cell Number is required', (v) => v.startsWith('7') || 'Employer Cell Number must start with 7',]"></v-text-field>
-                                  <v-text-field v-if="transfered === 'yes'" name="input-1" label="Account Number" color="primary" v-model="model.nis_rad" required readonly dense
-                                    id="testing" style="margin: 1em;"></v-text-field>
-                                </div>
                           </v-form>
 
                           <v-form class="form">
@@ -905,7 +886,7 @@
                       </v-card-text>
                     </v-form>
                   </v-card>
-		              <v-btn color="primary" @click="prevStep(11)">Back</v-btn>
+		  <v-btn color="primary" @click="prevStep(11)">Back</v-btn>
                   <v-btn color="primary" outlined @click="saveStep(11)">Save</v-btn>
                   <v-btn color="green" big style="margin-left: 69%" @click="nextStep(11)">Next</v-btn>
                   <center><v-btn style="margin-top: 20px" @click="cancelled" outlined big color="red" :href="'/indyconn'">Cancel</v-btn></center>
@@ -988,14 +969,14 @@
       towwns: [],
       ssurbub: [],
       sstreets: [],
-      custype: false,
-      employed: false,
-      rservice: false,
-      newaccount: false,
-      complet: false,
-      transfer: false,
-      transfered: false,
-      newconapp: false,
+
+      custype: "",
+      employed: "",
+      rservice: "",
+      newaccount: "",
+      complet: "",
+      newconapp: "",
+
       loading: false,
       visible: false,
       isLoading: false,
@@ -1014,6 +995,13 @@
       contractor_cell: "",
 
       model: {
+	custype: "",//indi or org
+	employed: "",//employed or not
+	rservice: "",//requested service	
+	newaccount: "",//new acc or transfer
+        complet: "",//cont or save for constractor
+	newconapp: "",//new app or cont app
+
         town: "",//town
         surburb: "",//surburb
         street: "",//street
@@ -1169,6 +1157,67 @@
           window.location.href = '/indyconn';
         }
       },
+      cancelled: function () {
+          this.e1 = 1;
+          this.$refs.form1.reset();
+          this.$refs.form2.reset();
+          this.$refs.form3.reset();
+          this.$refs.form4.reset();
+          this.$refs.form5.reset();
+          this.$refs.form6.reset();
+          this.$refs.form7.reset();
+          this.$refs.form8.reset();
+	  this.$refs.form9.reset();
+	  this.$refs.form10.reset();
+	  this.$refs.form11.reset();
+      },
+
+      getAppAll: function () {
+	  this.getApp();
+	  this.nextStep(1);
+      },
+
+      getApp: function () {
+                if (this.$refs.form1.validate()) {
+                    this.showed = false;
+                    this.isLoading = true;
+                    this.$axios
+                        .request({
+                            url: "http://172.16.29.12:3017/api/newnetmet8/" + this.model.pjob.toUpperCase(),
+                            method: "post",
+                        })
+                        .then(response => {
+                            this.isLoading = false;
+                            this.pstatus = response.data;
+                            if (this.pstatus == "") {
+                                this.showed = false;
+                                Swal.fire({
+                                    title: "Invalid PJob Number",
+                                    type: "warning",
+                                    showCancelButton: false,
+                                    allowOutsideClick: false,
+                                    confirmButtonColor: "#3085d6",
+                                    cancelButtonColor: "#d33",
+                                    confirmButtonText: "OKAY"
+                                }).then(result => {
+                                    if (result.value) {
+                                        this.pjob = "";
+                                        this.$router.push("/indyconn");
+                                    }
+                                });
+                            } else {
+                                this.showed = true;
+                                this.isLoading = false;
+                                this.pstatus = response.data;
+                                console.log(response.data)
+                            }
+                        })
+                        .catch(e => {
+                            this.isLoading = false;
+                            //   console.log(e)
+                        });
+                }
+      },
 
       onUpdateContact1(value) {
         console.log('First phone number updated:', value)
@@ -1276,8 +1325,10 @@
       },
 
       saveStep: function (e) {
-        if (e == 2) {
+	if (e == 2) {
           if (this.$refs.form2.validate()) {
+	    this.model.newconapp = this.newconapp;
+	    this.model.custype = this.custype;
             this.register2();
           }
         } else if (e == 3) {
@@ -1415,7 +1466,7 @@
             this.model.contact1 = this.results.formattedNumber;
             this.isLoading = true;
             this.$axios.request({
-              url: "http://172.16.29.12:3017/api/newnetmet3",
+              url: "http://172.16.29.12:3017/api/newnetmet8",
               method: "post", 
               headers:{'Authorization': 'Bearer '+localStorage.getItem('token')},
               data: this.model,
@@ -1464,12 +1515,12 @@
         this.errors = [];
         this.success = [];
         if (this.$refs.form2.validate()) {
-          this.model.gender = this.model.gender.toUpperCase();
+            this.model.gender = this.model.gender.toUpperCase();
             this.model.surname = this.model.surname.toUpperCase();
             this.model.customer_name = this.model.customer_name.toUpperCase();
             this.model.document_id = this.model.document_id.toUpperCase();
             this.model.contact1 = this.results.formattedNumber;
-            this.isLoading = true;
+	    this.isLoading = true;
             this.$axios.request({
               url: "http://172.16.29.12:3017/api/newnetmet8",
               method: "post", 
@@ -1478,7 +1529,7 @@
             }).then((response) => {
               this.isLoading = false;
               if (response.data != "" || response.data != null) {
-                this.success.push( "Your application has been saved successfully. Your unique Application Number, " + response.data + ", has been assigned to you. You will need this reference number to access and continue your application at a later time. Please write it down and keep it in a safe place. ");
+                this.success.push( "Your application has been saved successfully. Your unique Application Number, " + response.data );
                 this.$router.push({ path: "/success2", query: { data: response.data }, });
               } else {
                   this.showMessage();
