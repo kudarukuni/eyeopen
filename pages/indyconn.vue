@@ -275,7 +275,7 @@
                         <v-text-field sx6 v-if="custype === 'org'" dense name="input-1" label="Shareholders Postal Address" color="primary" v-model="model.rep_postal_address" required id="testing" style="margin: 1em; width: 10px;" :rules="[(v) => !!v || 'Shareholders Postal Address is required']"></v-text-field>
                       </v-flex>
                       <v-flex xs12 d-flex>
-                        <v-text-field dense sx6 v-if="custype === 'indi'" v-model="model.nok_contact2" label="Landline Number" style="margin: 1em; width: 10px" @update="onUp" :rules="[(v) => !!v || 'Your Phone Number is required',(v) => v !== model.nok_contact1 || 'Landline Number Must be Different From Next of Kin Cellphone Number', (v) => v !== model.owner_contact1 || 'Landline Number Must be Different From Owner Cellphone Number', (v) => isValidLandlineNumber(v) || 'Please enter a valid landline number']"></v-text-field>
+                        <v-text-field dense sx6 v-if="custype === 'indi'" v-model="model.nok_contact2" label="Landline Number" style="margin: 1em; width: 10px" @update="onUp"></v-text-field>
                         <v-text-field readonly dense sx6 v-if="custype === 'indi'" v-model="model.nok_contact1" label="Next of Kin's Cellphone Number" required style="margin: 1em; width: 10px; text-align: center;" outlined @update="onUpdate" :rules="[(v) => (v && v.length === 9) || 'Your Phone Number must be 9 characters long', (v) => !!v || 'Owner Cellphone Number is required', (v) => (v && v.startsWith('7')) || 'Your Phone Number must start with 7', (v) => v !== model.nok_contact2 || 'Cellphone Number Must be Different From Next of Kin Landline Number', (v) => v !== model.owner_contact1 || 'Cellphone Number Must be Different From Owner Cellphone Number', (v) => v !== model.owner_contact2 || 'Cellphone Number Must be Different From Owner Landline Number']"></v-text-field>
                         <VuePhoneNumberInput sx6 v-if="custype === 'org'" dense v-model="model.rep_contact1" required default-country-code="ZW" valid-color="green" style="margin: 1em; width: 10px" @update="onUpdate" maxlength="9" :rules="[(v) => (v && v.length === 9) || 'Your Phone Number must be 9 characters long', (v) => !!v || 'Your Phone Number is required', (v) => (v && v.startsWith('7')) || 'Your Phone Number must start with 7']"/>
                         <v-text-field sx6 v-if="custype === 'org'" dense v-model="model.rep_contact2" label="Landline Number" style="margin: 1em; width: 10px" @update="onUp" :rules="[(v) => !!v || 'Your Phone Number is required', (v) => v !== model.rep_contact1 || 'Landline Number Must be Different From Representative Cellphone', (v) => v !== model.company_phone1 || 'Landline Number Must be Different From Company Cellphone Number', (v) => v !== model.company_phone2 || 'Landline Number Must be Different From Company Landline Number', (v) => isValidLandlineNumber(v) || 'Please enter a valid landline number']"></v-text-field>
@@ -537,15 +537,15 @@
                         <VuePhoneNumberInput sx6 v-model="model.contractor_contact1" required default-country-code="ZW" dense valid-color="green" style="margin: 1em; width: 10px" @update="onUpdate2" maxlength="9" :rules="[(v) => v.length === 9 || 'Contractors Phone Number must be 9 characters long', (v) => !!v || 'Contractors Phone Number is required', (v) => v.startsWith('7') || 'Contractors Phone Number must start with 7',]"/>
                       </v-flex>
                       <v-flex xs12 d-flex>
-                        <v-text-field sx6 v-model="model.contractor_contact2" label = "Landline Number" required default-country-code="ZW" valid-color="green" style="margin: 1em; width: 10px" dense @update="onUpdate2" maxlength="9" :rules="[(v) => v.length === 9 || 'Contractors Cell Number must be 9 characters long', (v) => !!v || 'Contractors Cell Number is required', (v) => v.startsWith('7') || 'Contractors Cell Number must start with 7',]"></v-text-field>
-			<v-text-field readonly sx6 dense v-model="model.contractor_contact1" label="Contractors Cellphone Number" required style="margin: 1em; width: 10px; text-align: left;" dense outlined @update="onUpdate2" maxlength="9" :rules="[(v) => (v && v.length === 9) || 'Cellphone Number must be 9 characters long', (v) => !!v || 'Cellphone Number is required', (v) => (v && v.startsWith('7')) || 'Cellphone Number must start with 7', (v) => v !== model.owner_contact2 || 'Cellphone Number Must Differ From Owner Landline Number']"></v-text-field>
+                        <v-text-field sx6 v-model="model.contractor_contact2" label = "Landline Number" default-country-code="ZW" valid-color="green" style="margin: 1em; width: 10px" dense @update="onUpdate2"></v-text-field>
+			                  <v-text-field readonly sx6 dense v-model="model.contractor_contact1" label="Contractors Cellphone Number" required style="margin: 1em; width: 10px; text-align: left;" dense outlined @update="onUpdate2" maxlength="9" :rules="[(v) => (v && v.length === 9) || 'Cellphone Number must be 9 characters long', (v) => !!v || 'Cellphone Number is required', (v) => (v && v.startsWith('7')) || 'Cellphone Number must start with 7', (v) => v !== model.owner_contact2 || 'Cellphone Number Must Differ From Owner Landline Number']"></v-text-field>
                       </v-flex>
                       <v-flex xs12 d-flex>
-			<v-text-field sx6 name="input-1" label="Contracting Firm's Address" color="primary" v-model="model.contractor_address" required id="testing" dense style="margin: 1em; width: 10px;" :rules="[v => !!v || 'Contracting Firm Address is required']"></v-text-field>
+			                  <v-text-field sx6 name="input-1" label="Contracting Firm's Address" color="primary" v-model="model.contractor_address" required id="testing" dense style="margin: 1em; width: 10px;" :rules="[v => !!v || 'Contracting Firm Address is required']"></v-text-field>
                       </v-flex>
                     </v-form>
                   </v-card>
-		  <v-btn color="primary" @click="prevStep(9)">Back</v-btn>
+		              <v-btn color="primary" @click="prevStep(9)">Back</v-btn>
                   <v-btn color="primary" outlined @click="saveStep(9)">Save</v-btn>
                   <v-btn color="green" big style="margin-left: 69%" @click="nextStep(9)">Next</v-btn>
                   <center><v-btn style="margin-top: 20px" @click="cancelled" outlined big color="red" :href="'/indyconn'">Cancel</v-btn></center>
@@ -664,7 +664,7 @@
                 </v-stepper-content>
 
                 <v-stepper-content step="11">
-                  <v-card class="mb-5" height="2000px">
+                  <v-card class="mb-5" width="700px" height="2000px">
                     <v-form ref="form9">
                       <v-card-text>
                         <div ref="printContent" class="print-content">
@@ -699,7 +699,7 @@
                           <v-form class="form">
                                 <div class="form-column">
                                   <v-text-field name="input-1" label="Other Phone Number" color="primary" v-model="model.owner_contact2" required readonly dense
-                                    id="testing" style="margin: 0.5em;" :rules="[(v) => v.length === 9 || 'Your Cell Number must be 9 characters long', (v) => !!v || 'Your Cell Number is required', (v) => v.startsWith('7') || 'Your Cell Number must start with 7',]"></v-text-field>
+                                    id="testing" style="margin: 0.5em;"></v-text-field>
                                   <v-select xs6 :items="sortStr()" v-model="model.street" label="Street" item-text="nom_CALLE" item-value="cod_CALLE" required readonly dense :rules="[(v) => !!v || 'Street  is required']" class="input-group--focused" style="margin: 0.5em"></v-select>
                                   <v-text-field name="input-1" label="Extension" color="primary" v-model="model.duplicator" required readonly dense
                                     id="testing" style="margin: 0.5em;"></v-text-field>
