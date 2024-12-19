@@ -47,37 +47,37 @@
                       <center>
                         <div class="row justify-content-center">
                           <span class="col-3"></span>
-			  <span class="col-3 mb-1 mt-1 modern-checkbox">
-			    <input v-model="newconapp" class="ms-1" type="radio" id="newa" value="newa" name="newconapp"/>
+                          <span class="col-3 mb-1 mt-1 modern-checkbox">
+                            <input v-model="newconapp" class="ms-1" type="radio" id="newa" value="newa" name="newconapp"/>
                             <label for="newa"><strong> <font color="#434343">New Application</font></strong><font color="#e96844">*</font></label>
                           </span>
                           <span class="col-3 ms-1 mb-1 mt-1 modern-checkbox">
-			    <input v-model="newconapp" class="ms-1" type="radio" id="conta" value="conta" name="newconapp2"/>
+			                      <input v-model="newconapp" class="ms-1" type="radio" id="conta" value="conta" name="newconapp2"/>
                             <label for="conta"><strong> <font color="#434343">Continue Application</font></strong><font color="#e96844">*</font></label>
-			  </span><br>
-			<span class="col-3"></span>
+                  			  </span><br>
+			                    <span class="col-3"></span>
                         </div>
                       </center><br><br><br>
 
                       <center v-if="newconapp === 'conta'">
-		      <h4 v-if="newconapp === 'conta'">
-		      <p v-if="newconapp === 'conta'" dense style="font-family: 'Gill Sans', Arial, Helvetica, sans-serif"><font v-if="newconapp === 'conta'" color="#fc5457">Enter Reference Number To Continue Where You Left:</font></p></h4></center>
+		                  <h4 v-if="newconapp === 'conta'">
+		                  <p v-if="newconapp === 'conta'" dense style="font-family: 'Gill Sans', Arial, Helvetica, sans-serif"><font v-if="newconapp === 'conta'" color="#fc5457">Enter Reference Number To Continue Where You Left:</font></p></h4></center>
                       <div v-if="newconapp === 'conta'" class="row justify-content-center">
                         <div v-if="newconapp === 'conta'" class="col-auto d-flex align-items-center">
-			  <v-text-field v-if="newconapp === 'conta'" dense color="primary" required outlined clearable label="Reference Number" :max-length="15" v-model="model.pjob" @keyup.enter="getApp" id="testing" class="mr-3" style="margin-left: 270px"></v-text-field>
+			                    <v-text-field v-if="newconapp === 'conta'" dense color="primary" required outlined clearable label="Reference Number" :max-length="15" v-model="model.pjob" @keyup.enter="getApp" id="testing" class="mr-3" style="margin-left: 270px"></v-text-field>
                           <v-btn v-if="newconapp === 'conta'" dense color="primary" @click="getAppAll"><v-icon v-if="newconapp === 'conta'" light>mdi-magnify</v-icon></v-btn>
                         </div>
                       </div>
-		      <center v-if="newconapp === 'newa'">
-		      <h4 v-if="newconapp === 'newa'">
-	              <p v-if="newconapp === 'newa'" dense style="font-family: 'Gill Sans', Arial, Helvetica, sans-serif">
-		      <font v-if="newconapp === 'newa'" color="#fc5457">Please Choose A Customer Type:</font></p></h4></center>
+            		      <center v-if="newconapp === 'newa'">
+		                  <h4 v-if="newconapp === 'newa'">
+	                    <p v-if="newconapp === 'newa'" dense style="font-family: 'Gill Sans', Arial, Helvetica, sans-serif">
+		                  <font v-if="newconapp === 'newa'" color="#fc5457">Please Choose A Customer Type:</font></p></h4></center>
                       <center v-if="newconapp === 'newa'">
                         <div v-if="newconapp === 'newa'" class="row justify-content-center">
                           <span v-if="newconapp === 'newa'" class="col-3"></span>
-			  <span v-if="newconapp === 'newa'" class="col-3 mb-1 mt-1 modern-checkbox">
-			   <input v-if="newconapp === 'newa'" v-model="custype" @click="nextStep(1)" class="ms-1" type="radio" id="indi" value="indi" name="custype"/>
-                           <label v-if="newconapp === 'newa'" for="indi"><strong> <font color="#434343">Individuals</font></strong><font color="#e96844">*</font></label>
+                          <span v-if="newconapp === 'newa'" class="col-3 mb-1 mt-1 modern-checkbox">
+                            <input v-if="newconapp === 'newa'" v-model="custype" @click="nextStep(1)" class="ms-1" type="radio" id="indi" value="indi" name="custype"/>
+                            <label v-if="newconapp === 'newa'" for="indi"><strong> <font color="#434343">Individuals</font></strong><font color="#e96844">*</font></label>
                           </span>
                           <span v-if="newconapp === 'newa'" class="col-3 ms-1 mb-1 mt-1 modern-checkbox">
                             <input v-if="newconapp === 'newa'" v-model="custype" @click="nextStep(1)" class="ms-1" type="radio" id="org" value="org" name="custype2"/>
@@ -189,10 +189,8 @@
                             <div v-for="(item1, index) in uploadedFiles1" style="display: flex;">
                               <!--The hiding effect can be achived using this piece of code please keep me safe i cannt die -->
                               <!--<v-text-field style="width: 35px; color: red; margin-right: 435px; text-align: right;" class="text-field-transparent" flat name="originalName" type="text" autocomplete="off" :placeholder="item1.originalName" readonly></v-text-field><br/>-->
-                 
-		              <v-text-field style="width: 400px; text-align: right;" name="originalName" type="text" autocomplete="off" readonly :placeholder="item1.originalName"></v-text-field>
+            		              <v-text-field style="width: 400px; text-align: right;" name="originalName" type="text" autocomplete="off" readonly :placeholder="item1.originalName"></v-text-field>
                               <v-text-field style="width: 1px; color: red; margin-right: 10px; text-align: right;" class="text-field-transparent" flat v-model="model.owner_id_proof = item1.id" name="owner_id_proof" type="text" autocomplete="off" readonly :rules="[(v) => !!v || 'Owner ID Proof is required',]"></v-text-field>
-
                               <!--<v-text-field style="width: 75px; text-align: right;" name="owner_id_proof" type="text" autocomplete="off" v-model="model.owner_id_proof = item1.id" readonly :rules="[(v) => !!v || 'Owner ID Proof is required',]"></v-text-field>
                               <v-text-field style="width: 100px; color: red; margin-right: 10px; text-align: right;" class="text-field-transparent" flat name="originalName" type="text" autocomplete="off" :placeholder="item1.originalName" readonly></v-text-field><br/>-->
                             </div>
@@ -667,118 +665,142 @@
 
                 <v-stepper-content step="11">
                   <v-card class="mb-5" height="2000px">
-                    <v-form ref="form11">
+                    <v-form ref="form9">
                       <v-card-text>
                         <div ref="printContent" class="print-content">
                           <v-form class="form">
                                 <div class="form-column">
                                   <v-text-field name="input-1" label="Title" color="primary" v-model="model.gender" required readonly dense
-                                    id="testing" style="margin: 1em; width: 50px;" :rules="[(v) => !!v || 'Title is required']"></v-text-field>
+                                    id="testing" style="margin: 0.5em; width: 50px;" :rules="[(v) => !!v || 'Title is required']"></v-text-field>
                                   <v-text-field name="input-1" label="Document ID" color="primary" v-model="model.document_id" required dense
-                                    id="testing" style="margin: 1em;"></v-text-field>                                
+                                    id="testing" style="margin: 0.5em;"></v-text-field>                                
                                 </div>                              
                                 <div class="form-column">
                                   <v-text-field name="input-1" label="Surname" color="primary" v-model="model.surname" required readonly dense
-                                    id="testing" style="margin: 1em;"></v-text-field>
+                                    id="testing" style="margin: 0.5em;"></v-text-field>
                                   <v-text-field name="input-1" label="Email" color="primary" v-model="model.email" required readonly dense
-                                    id="testing" style="margin: 1em;"></v-text-field>
+                                    id="testing" style="margin: 0.5em;"></v-text-field>
                                 </div>
                                 <div class="form-column">
                                   <v-text-field name="input-1" label="Firstname" color="primary" v-model="model.customer_name" required readonly dense
-                                    id="testing" style="margin: 1em;"></v-text-field>
+                                    id="testing" style="margin: 0.5em;"></v-text-field>
                                   <v-text-field name="input-1" label="Phone Number" color="primary" v-model="model.owner_contact1" required readonly dense
-                                    id="testing" style="margin: 1em;" :rules="[(v) => v.length === 9 || 'Your Phone Number must be 9 characters long', (v) => !!v || 'Your Phone Number is required', (v) => v.startsWith('7') || 'Your Phone Number must start with 7',]"></v-text-field>
+                                    id="testing" style="margin: 0.5em;" :rules="[(v) => v.length === 9 || 'Your Phone Number must be 9 characters long', (v) => !!v || 'Your Phone Number is required', (v) => v.startsWith('7') || 'Your Phone Number must start with 7',]"></v-text-field>
                                 </div>
                           </v-form><br/><br/>
 
                           <v-form class="form">
                                 <div class="form-column">
                                   <v-text-field name="input-1" label="Physical Address" color="primary" v-model="model.postal_address_a" required readonly dense
-                                    id="testing" style="margin: 1em; width: 695px;"></v-text-field>
+                                    id="testing" style="margin: 0.5em; width: 695px;"></v-text-field>
                                 </div>
                           </v-form><br/><br/>
 
                           <v-form class="form">
                                 <div class="form-column">
                                   <v-text-field name="input-1" label="Other Phone Number" color="primary" v-model="model.owner_contact2" required readonly dense
-                                    id="testing" style="margin: 1em;" :rules="[(v) => v.length === 9 || 'Your Cell Number must be 9 characters long', (v) => !!v || 'Your Cell Number is required', (v) => v.startsWith('7') || 'Your Cell Number must start with 7',]"></v-text-field>
-                                  <v-select xs6 :items="sortStr()" v-model="model.street" label="Street" item-text="nom_CALLE" item-value="cod_CALLE" required readonly dense :rules="[(v) => !!v || 'Street  is required']" class="input-group--focused" style="margin: 1em"></v-select>
+                                    id="testing" style="margin: 0.5em;" :rules="[(v) => v.length === 9 || 'Your Cell Number must be 9 characters long', (v) => !!v || 'Your Cell Number is required', (v) => v.startsWith('7') || 'Your Cell Number must start with 7',]"></v-text-field>
+                                  <v-select xs6 :items="sortStr()" v-model="model.street" label="Street" item-text="nom_CALLE" item-value="cod_CALLE" required readonly dense :rules="[(v) => !!v || 'Street  is required']" class="input-group--focused" style="margin: 0.5em"></v-select>
                                   <v-text-field name="input-1" label="Extension" color="primary" v-model="model.duplicator" required readonly dense
-                                    id="testing" style="margin: 1em;"></v-text-field>
+                                    id="testing" style="margin: 0.5em;"></v-text-field>
                                   <v-text-field name="input-1" label="Next Of Kin National ID" color="primary" v-model="model.nok_national_id" required readonly dense
-                                    id="testing" style="margin: 1em;"></v-text-field>
+                                    id="testing" style="margin: 0.5em;"></v-text-field>
                                 </div>                              
                                 <div class="form-column">
                                   <v-select :items="sortFunc()" item-text="nom_MUNIC" item-value="cod_MUNIC" label="Town" required @change="surbubName($event)"
-                                    :rules="[(v) => !!v || 'Town  is required']" class="input-group--focused" style="margin: 1em" name="input-1" v-model="model.town" readonly dense
+                                    :rules="[(v) => !!v || 'Town  is required']" class="input-group--focused" style="margin: 0.5em" name="input-1" v-model="model.town" readonly dense
                                     id="testing"></v-select>
                                   <v-text-field name="input-1" label="Stand Number (Plot Number)" color="primary" v-model="model.standnumber" required readonly dense
-                                    id="testing" style="margin: 1em;"></v-text-field>
+                                    id="testing" style="margin: 0.5em;"></v-text-field>
                                   <v-text-field name="input-1" label="Next Of Kin Surname" color="primary" v-model="model.nok_surname" required readonly dense
-                                    id="testing" style="margin: 1em;"></v-text-field>
+                                    id="testing" style="margin: 0.5em;"></v-text-field>
                                   <v-text-field name="input-1" label="Next Of Kin Phone Number" color="primary" v-model="model.nok_contact1" required readonly dense
-                                    id="testing" style="margin: 1em;" :rules="[(v) => v.length === 9 || 'Next Of Kin Phone Number must be 9 characters long', (v) => !!v || 'Next Of Kin Phone Number is required', (v) => v.startsWith('7') || 'Next Of Kin Phone Number must start with 7',]"></v-text-field>
+                                    id="testing" style="margin: 0.5em;" :rules="[(v) => v.length === 9 || 'Next Of Kin Phone Number must be 9 characters long', (v) => !!v || 'Next Of Kin Phone Number is required', (v) => v.startsWith('7') || 'Next Of Kin Phone Number must start with 7',]"></v-text-field>
                                 </div>
                                 <div class="form-column">
                                   <v-select xs6 :items="sortSub()" v-model="model.surburb" label="Suburb" required @change="streetName($event)" :rules="[(v) => !!v || 'Surbub  is required']"
-                                    item-text="nom_LOCAL" item-value="cod_LOCAL" class="input-group--focused" style="margin: 1em" readonly dense></v-select>
+                                    item-text="nom_LOCAL" item-value="cod_LOCAL" class="input-group--focused" style="margin: 0.5em" readonly dense></v-select>
                                   <v-text-field name="input-1" label="Street Number" color="primary" v-model="model.door_number" required readonly dense
-                                    id="testing" style="margin: 1em;"></v-text-field>
+                                    id="testing" style="margin: 0.5em;"></v-text-field>
                                   <v-text-field name="input-1" label="Next Of Kin Firstname" color="primary" v-model="model.nok_firstname" required readonly dense
-                                    id="testing" style="margin: 1em;"></v-text-field>
+                                    id="testing" style="margin: 0.5em;"></v-text-field>
                                   <v-text-field name="input-1" label="Next Of Kin Other Phone Number" color="primary" v-model="model.nok_contact2" required readonly dense
-                                    id="testing" style="margin: 1em;" :rules="[(v) => v.length === 9 || 'Next Of Kin Cell Number must be 9 characters long', (v) => !!v || 'Next Of Kin Cell Number is required', (v) => v.startsWith('7') || 'Next Of Kin Cell Number must start with 7',]"></v-text-field>
+                                    id="testing" style="margin: 0.5em;" :rules="[(v) => v.length === 9 || 'Next Of Kin Cell Number must be 9 characters long', (v) => !!v || 'Next Of Kin Cell Number is required', (v) => v.startsWith('7') || 'Next Of Kin Cell Number must start with 7',]"></v-text-field>
                                 </div>
                           </v-form><br/><br/>
 
                           <v-form class="form">
                                 <div class="form-column">
                                   <v-text-field name="input-1" label="Next Of Kin Physical Address" color="primary" v-model="model.nok_address" required readonly dense
-                                    id="testing" style="margin: 1em; width: 695px;"></v-text-field>
+                                    id="testing" style="margin: 0.5em; width: 695px;"></v-text-field>
                                 </div>
                           </v-form><br/><br/>
 
                           <v-form class="form">
                                 <div class="form-column">
                                   <v-autocomplete sx6 :items="purpose" v-model="model.supply_type" label="Type Of Supply" readonly dense required 
-                                    :rules="[v => !!v || 'Type of supply is required']" item-text="purpose" item-value="abbr" class="input-group--focused" style="margin: 1em;">
+                                    :rules="[v => !!v || 'Type of supply is required']" item-text="purpose" item-value="abbr" class="input-group--focused" style="margin: 0.5em;">
                                     </v-autocomplete>
-                                  <v-autocomplete sx6 :items="meter" v-model="model.connection_type" label="Connection Type" :rules="[v => !!v || 'Connection type is required']" item-text="meter" item-value="abbr" class="input-group--focused" style="margin: 1em;" required readonly dense></v-autocomplete>
+                                  <v-autocomplete sx6 :items="meter" v-model="model.connection_type" label="Connection Type" :rules="[v => !!v || 'Connection type is required']" item-text="meter" item-value="abbr" class="input-group--focused" style="margin: 0.5em;" required readonly dense></v-autocomplete>
                                   <v-text-field name="input-1" label="Main Switch AMP" color="primary" v-model="model.main_switch_amp" required readonly dense
-                                    id="testing" style="margin: 1em;"></v-text-field>
+                                    id="testing" style="margin: 0.5em;"></v-text-field>
                                   <v-text-field name="input-1" label="Contractor Surname" color="primary" v-model="model.contractor_surname" required readonly dense
-                                    id="testing" style="margin: 1em;"></v-text-field>
+                                    id="testing" style="margin: 0.5em;"></v-text-field>
                                 </div>
                                 <div class="form-column">
                                   <v-text-field name="input-1" label="Duration" color="primary" v-model="model.duration" required readonly dense
-                                    id="testing" style="margin: 1em;"></v-text-field>
+                                    id="testing" style="margin: 0.5em;"></v-text-field>
                                   <v-text-field name="input-1" label="Number Of Meters" color="primary" v-model="model.number_of_meter" required readonly dense
-                                    id="testing" style="margin: 1em;"></v-text-field>
+                                    id="testing" style="margin: 0.5em;"></v-text-field>
                                   <v-text-field name="input-1" label="Main Switch OR" color="primary" v-model="model.main_switch_or" required readonly dense
-                                    id="testing" style="margin: 1em;"></v-text-field>
+                                    id="testing" style="margin: 0.5em;"></v-text-field>
                                   <v-text-field name="input-1" label="Next Of Kin National ID" color="primary" v-model="model.contractor_name" required readonly dense
-                                    id="testing" style="margin: 1em;"></v-text-field>
+                                    id="testing" style="margin: 0.5em;"></v-text-field>
                                 </div>
                                 <div class="form-column">
                                   <v-text-field name="input-1" label="Roofing Material" color="primary" v-model="model.material" required readonly dense
-                                    id="testing" style="margin: 1em;"></v-text-field>
+                                    id="testing" style="margin: 0.5em;"></v-text-field>
                                   <v-text-field name="input-1" label="Main Switch KVA" color="primary" v-model="model.main_switch_kva" required readonly dense
-                                    id="testing" style="margin: 1em;"></v-text-field>
+                                    id="testing" style="margin: 0.5em;"></v-text-field>
                                   <v-text-field name="input-1" label="Cable Length" color="primary" v-model="model.cable_length" required readonly dense
-                                    id="testing" style="margin: 1em;"></v-text-field>
+                                    id="testing" style="margin: 0.5em;"></v-text-field>
                                   <v-text-field name="input-1" label="Contractor Firm" color="primary" v-model="model.contractor_firm" required readonly dense
-                                    id="testing" style="margin: 1em;"></v-text-field>
+                                    id="testing" style="margin: 0.5em;"></v-text-field>
                                 </div>
                           </v-form><br/><br/>
 
                           <v-form class="form">
                                 <div class="form-column">
                                   <v-text-field name="input-1" label="Contracting Firm's Physical Address" color="primary" v-model="model.contractor_address" required readonly dense
-                                    id="testing" style="margin: 1em; width: 695px;"></v-text-field>
+                                    id="testing" style="margin: 0.5em; width: 695px;"></v-text-field>
                                 </div>
                           </v-form><br/><br/>
 
                           <v-form class="form">
+                                <div class="form-column">
+                                  <v-text-field v-if="transfered === 'yess'" name="input-1" label="Name Of Employer" color="primary" v-model="model.name_of_employer" required readonly dense
+                                    id="testing" style="margin: 0.5em;" ></v-text-field>
+                                  <v-text-field v-if="transfered === 'yess'" name="input-1" label="Premise Owner" color="primary" v-model="model.premise_owner" required readonly dense
+                                    id="testing" style="margin: 0.5em;"></v-text-field>
+                                  <v-text-field v-if="transfered === 'yess'" name="input-1" label="Reason for Transfer Connection" color="primary" v-model="model.transfer_reason2" required readonly dense
+                                    id="testing" style="margin: 0.5em;"></v-text-field>
+                                  <v-text-field v-if="transfered === 'yes'" name="input-1" label="Reason for Reconnection" color="primary" v-model="model.transfer_reason" required readonly dense
+                                    id="testing" style="margin: 0.5em;"></v-text-field>
+                                </div>
+                                <div class="form-column">
+                                  <v-text-field v-if="transfered === 'yess'" name="input-1" label="Name Of Trade" color="primary" v-model="model.name_of_trade" required readonly dense
+                                    id="testing" style="margin: 0.5em;"></v-text-field>
+                                  <v-text-field v-if="transfered === 'yess'" name="input-1" label="Employer Contact" color="primary" v-model="model.employed_contact1" required readonly dense
+                                    id="testing" style="margin: 0.5em;" :rules="[(v) => v.length === 9 || 'Employer Phone Number must be 9 characters long', (v) => !!v || 'Employer Your Phone Number is required', (v) => v.startsWith('7') || 'Employer Phone Number must start with 7',]"></v-text-field>
+                                  <v-text-field v-if="transfered === 'yes'" name="input-1" label="Service Point Number" color="primary" v-model="model.service_point_address" required readonly dense
+                                    id="testing" style="margin: 0.5em;"></v-text-field>
+                                </div>
+                                <div class="form-column">
+                                  <v-text-field v-if="transfered === 'yess'" name="input-1" label="Roofing Material" color="primary" v-model="model.premise_owner_address" required readonly dense id="testing" style="margin: 0.5em;"></v-text-field>
+                                  <v-text-field v-if="transfered === 'yess'" name="input-1" label="Other Employer Contact" color="primary" v-model="model.employed_contact2" required readonly dense id="testing" style="margin: 0.5em;" :rules="[(v) => v.length === 9 || 'Employer Cell Number must be 9 characters long', (v) => !!v || 'Employer Your Cell Number is required', (v) => v.startsWith('7') || 'Employer Cell Number must start with 7',]"></v-text-field>
+                                  <v-text-field v-if="transfered === 'yes'" name="input-1" label="Account Number" color="primary" v-model="model.nis_rad" required readonly dense
+                                    id="testing" style="margin: 0.5em;"></v-text-field>
+                                </div>
                           </v-form>
 
                           <v-form class="form">
@@ -787,7 +809,7 @@
                                     <thead>
                                       <tr>
                                         <th class="text-left"><font color="black">Type Of Installation</font></th>
-                                        <th class="text-left"><font color="black">Number</font></th>
+                                        <th class="text-left"><font color="black">Number</font></font></th>
                                         <th class="text-left"><font color="black">Number Of Circuits</font></th>
                                         <th class="text-left"><font color="black">Estimatted Wattage</font></th>
                                       </tr>
@@ -886,7 +908,7 @@
                       </v-card-text>
                     </v-form>
                   </v-card>
-		  <v-btn color="primary" @click="prevStep(11)">Back</v-btn>
+		              <v-btn color="primary" @click="prevStep(11)">Back</v-btn>
                   <v-btn color="primary" outlined @click="saveStep(11)">Save</v-btn>
                   <v-btn color="green" big style="margin-left: 69%" @click="nextStep(11)">Next</v-btn>
                   <center><v-btn style="margin-top: 20px" @click="cancelled" outlined big color="red" :href="'/indyconn'">Cancel</v-btn></center>
