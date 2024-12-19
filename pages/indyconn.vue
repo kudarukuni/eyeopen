@@ -664,7 +664,7 @@
                 </v-stepper-content>
 
                 <v-stepper-content step="11">
-                  <v-card class="mb-5" width="700px" height="2000px">
+                  <v-card class="mb-5" width="900px" height="1600px">
                     <v-form ref="form9">
                       <v-card-text>
                         <div ref="printContent" class="print-content">
@@ -725,7 +725,7 @@
                                   <v-text-field name="input-1" label="Next Of Kin Firstname" color="primary" v-model="model.nok_firstname" required readonly dense
                                     id="testing" style="margin: 0.5em;"></v-text-field>
                                   <v-text-field name="input-1" label="Next Of Kin Other Phone Number" color="primary" v-model="model.nok_contact2" required readonly dense
-                                    id="testing" style="margin: 0.5em;" :rules="[(v) => v.length === 9 || 'Next Of Kin Cell Number must be 9 characters long', (v) => !!v || 'Next Of Kin Cell Number is required', (v) => v.startsWith('7') || 'Next Of Kin Cell Number must start with 7',]"></v-text-field>
+                                    id="testing" style="margin: 0.5em;"></v-text-field>
                                 </div>
                           </v-form><br/><br/>
 
