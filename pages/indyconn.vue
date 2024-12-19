@@ -1017,13 +1017,12 @@
       contractor_cell: "",
 
       model: {
-	custype: "",//indi or org
-	employed: "",//employed or not
-	rservice: "",//requested service	
-	newaccount: "",//new acc or transfer
+        custype: "",//indi or org
+        employed: "",//employed or not
+        rservice: "",//requested service	
+        newaccount: "",//new acc or transfer
         complet: "",//cont or save for constractor
-	newconapp: "",//new app or cont app
-
+        newconapp: "",//new app or cont app
         town: "",//town
         surburb: "",//surburb
         street: "",//street
@@ -1179,66 +1178,67 @@
           window.location.href = '/indyconn';
         }
       },
+
       cancelled: function () {
-          this.e1 = 1;
-          this.$refs.form1.reset();
-          this.$refs.form2.reset();
-          this.$refs.form3.reset();
-          this.$refs.form4.reset();
-          this.$refs.form5.reset();
-          this.$refs.form6.reset();
-          this.$refs.form7.reset();
-          this.$refs.form8.reset();
-	  this.$refs.form9.reset();
-	  this.$refs.form10.reset();
-	  this.$refs.form11.reset();
+        this.e1 = 1;
+        this.$refs.form1.reset();
+        this.$refs.form2.reset();
+        this.$refs.form3.reset();
+        this.$refs.form4.reset();
+        this.$refs.form5.reset();
+        this.$refs.form6.reset();
+        this.$refs.form7.reset();
+        this.$refs.form8.reset();
+        this.$refs.form9.reset();
+        this.$refs.form10.reset();
+        this.$refs.form11.reset();
       },
 
       getAppAll: function () {
-	  this.getApp();
-	  this.nextStep(1);
+        this.getApp();
+        this.nextStep(1);
       },
 
       getApp: function () {
-                if (this.$refs.form1.validate()) {
-                    this.showed = false;
-                    this.isLoading = true;
-                    this.$axios
-                        .request({
-                            url: "http://172.16.29.12:3017/api/newnetmet8/" + this.model.pjob.toUpperCase(),
-                            method: "post",
-                        })
-                        .then(response => {
-                            this.isLoading = false;
-                            this.pstatus = response.data;
-                            if (this.pstatus == "") {
-                                this.showed = false;
-                                Swal.fire({
-                                    title: "Invalid PJob Number",
-                                    type: "warning",
-                                    showCancelButton: false,
-                                    allowOutsideClick: false,
-                                    confirmButtonColor: "#3085d6",
-                                    cancelButtonColor: "#d33",
-                                    confirmButtonText: "OKAY"
-                                }).then(result => {
-                                    if (result.value) {
-                                        this.pjob = "";
-                                        this.$router.push("/indyconn");
-                                    }
-                                });
-                            } else {
-                                this.showed = true;
-                                this.isLoading = false;
-                                this.pstatus = response.data;
-                                console.log(response.data)
-                            }
-                        })
-                        .catch(e => {
-                            this.isLoading = false;
-                            //   console.log(e)
-                        });
-                }
+        if (this.$refs.form1.validate()) {
+          this.showed = false;
+          this.isLoading = true;
+          this.$axios
+          .request({
+            url: "http://172.16.29.12:3017/api/newnetmet8/" + this.model.pjob.toUpperCase(),
+            method: "post",
+          })
+          .then(response => {
+            this.isLoading = false;
+            this.pstatus = response.data;
+            if (this.pstatus == "") {
+              this.showed = false;
+              Swal.fire({
+                title: "Invalid PJob Number",
+                type: "warning",
+                showCancelButton: false,
+                allowOutsideClick: false,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "OKAY"
+              }).then(result => {
+              if (result.value) {
+                  this.pjob = "";
+                  this.$router.push("/indyconn");
+              }
+              });
+            } else {
+              this.showed = true;
+              this.isLoading = false;
+              this.pstatus = response.data;
+              console.log(response.data)
+            }
+          })
+          .catch(e => {
+            this.isLoading = false;
+            //console.log(e)
+          });
+        }
       },
 
       onUpdateContact1(value) {
@@ -1288,7 +1288,7 @@
       showMessage() {
         Swal.fire({
           title: 'Error',
-          text: 'An unexpected error occurred. Please Contact The System Admininstrator',
+          text: 'An unexpected error occurred. Please Contact Rukuni',
           icon: 'error',
           confirmButtonText: 'OK',
           showCancelButton: false,
@@ -1347,27 +1347,49 @@
       },
 
       saveStep: function (e) {
-	if (e == 2) {
+	      if (e == 2) {
           if (this.$refs.form2.validate()) {
-	    this.model.newconapp = this.newconapp;
-	    this.model.custype = this.custype;
+	          this.model.newconapp = this.newconapp;
+	          this.model.custype = this.custype;
             this.register2();
           }
         } else if (e == 3) {
-          if (this.$refs.form3.validate()) {
+          if (this.$refs.form2.validate() & this.$refs.form3.validate()) {
+            this.model.rservice = this.rservice;
+	          this.model.custype = this.custype;
+            this.model.newconapp = this.newconapp;
             this.register3();
           }
         } else if (e == 4) {
-          if (this.$refs.form4.validate()) {
+          if (this.$refs.form2.validate() & this.$refs.form3.validate() & this.$refs.form4.validate()) {
             this.register4();
           }
         } else if (e == 5) {
           if (this.$refs.form5.validate()) {
+            this.model.rservice = this.rservice;
+	          this.model.custype = this.custype;
+            this.model.newconapp = this.newconapp;
+            this.model.employed = this.employed;
             this.register5();
           }
         } else if (e == 6) {
           if (this.$refs.form6.validate()) {
+            this.model.rservice = this.rservice;
+	          this.model.custype = this.custype;
+            this.model.newconapp = this.newconapp;
+            this.model.employed = this.employed;
+            this.model.newaccount = this.newaccount;
             this.register6();
+          }
+        } else if (e == 7) {
+          if (this.$refs.form7.validate()) {
+            this.model.rservice = this.rservice;
+	          this.model.custype = this.custype;
+            this.model.newconapp = this.newconapp;
+            this.model.employed = this.employed;
+            this.model.newaccount = this.newaccount;
+            this.model.complet = this.complet;
+            this.register7();
           }
         } else if (e == 8) {
           if (this.$refs.form8.validate()) {
@@ -1399,9 +1421,9 @@
           this.e1 = e - 1;
         } else if (e == 10) {
           this.e1 = e - 1;
-	} else if (e == 11) {
-          this.e1 = e - 1;
-	}
+        } else if (e == 11) {
+                this.e1 = e - 1;
+        }
       },
 
       onUpdate(payload) {
@@ -1871,4 +1893,3 @@
     display: flex;
   }
 </style>
-
