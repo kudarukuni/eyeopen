@@ -234,7 +234,7 @@
                         <v-select xs6 dense :items=sortSub() v-if="rservice === 'disconnect'" v-model="model.surbub" label="Suburb/Township" required @change="streetName($event)" :rules="[v => !!v || 'Surbub  is required']" item-text="nom_LOCAL" item-value="cod_LOCAL" class="input-group--focused" style="margin: 1em; width: 10px;"></v-select>
                       </v-flex>
                       <v-flex xs12 d-flex>                        
-                        <v-select xs6 dense v-if="rservice === 'connect'" v-model="model.street" label="Farm/Street Name" item-text="nom_CALLE" item-value="cod_CALLE" class="input-group--focused" style="margin: 1em; width: 10px;"></v-select>
+                        <v-select xs6 dense v-if="rservice === 'connect'" :items=sortStr() v-model="model.street" label="Farm/Street Name" item-text="nom_CALLE" item-value="cod_CALLE" class="input-group--focused" style="margin: 1em; width: 10px;"></v-select>
                         <v-text-field sx6 dense v-if="rservice === 'disconnect'" name="input-1" label="Physical Address" color="primary" v-model="model.d_physical_address" id="testing" style="margin: 1em; width: 10px;" :rules="[(v) => !!v || 'Physical Address is required',]"></v-text-field>
                         <v-autocomplete dense sx6 v-if="rservice === 'connect'" :items="nonstarnd" v-model="model.nonstarnd" label="Application Type" :rules="[v => !!v || 'Application Type is required']" item-text="nonstarnd" item-value="abbr" class="input-group--focused" style="margin: 1em; width: 10px;" required></v-autocomplete>
                         <v-autocomplete dense sx6 v-if="rservice === 'disconnect'" :items="nonstarnd" v-model="model.nonstarnd" label="Application Type" :rules="[v => !!v || 'Application Type is required']" item-text="nonstarnd" item-value="abbr" class="input-group--focused" style="margin: 1em; width: 10px;" required></v-autocomplete>
@@ -248,8 +248,8 @@
                       <v-flex xs12 d-flex>
                         <v-text-field xs6 dense v-if="rservice === 'connect'" name="duplicator" label="Extension" color="primary" :maxlength="max" v-model="model.duplicator" style="margin: 1em; width: 10px;" required @input="validateDoorNumber"></v-text-field>
                         <v-text-field xs6 dense v-if="rservice === 'disconnect'" name="duplicator" label="Extension" color="primary" :maxlength="max" v-model="model.duplicator" style="margin: 1em; width: 10px;" required @input="validateDoorNumber"></v-text-field>
-                        <v-text-field sx6 v-if="rservice === 'connect'" name="input-1" type="email" label="Email Address" v-model="model.email" dense :rules="[v => /.+@.+\..+/.test(v) || 'E-mail must be valid']" color="primary" id="testing" style="margin: 1em; width: 10px;"></v-text-field>
-                        <v-text-field sx6 v-if="rservice === 'disconnect'" name="input-1" type="email" label="Email Address" v-model="model.email" dense :rules="[v => /.+@.+\..+/.test(v) || 'E-mail must be valid']" color="primary" id="testing" style="margin: 1em; width: 10px;"></v-text-field>
+	                      <v-text-field sx6 v-if="rservice === 'connect'" name="input-1" type="email" label="Email Address" v-model="model.email" dense :rules="[v => /.+@.+\..+/.test(v) || 'E-mail must be valid']" color="primary" id="testing" style="margin: 1em; width: 10px;"></v-text-field>
+			                  <v-text-field sx6 v-if="rservice === 'disconnect'" name="input-1" type="email" label="Email Address" v-model="model.email" dense :rules="[v => /.+@.+\..+/.test(v) || 'E-mail must be valid']" color="primary" id="testing" style="margin: 1em; width: 10px;"></v-text-field>
                       </v-flex>
                     </v-form>
                   </v-card>
@@ -700,7 +700,7 @@
                                 <div class="form-column">
                                   <v-text-field name="input-1" label="Other Phone Number" color="primary" v-model="model.owner_contact2" required readonly dense
                                     id="testing" style="margin: 0.5em;"></v-text-field>
-                                  <v-select xs6 v-model="model.street" label="Street" item-text="nom_CALLE" item-value="cod_CALLE" required readonly dense :rules="[(v) => !!v || 'Street  is required']" class="input-group--focused" style="margin: 0.5em"></v-select>
+                                  <v-select xs6 :items="sortStr()" v-model="model.street" label="Street" item-text="nom_CALLE" item-value="cod_CALLE" required readonly dense :rules="[(v) => !!v || 'Street  is required']" class="input-group--focused" style="margin: 0.5em"></v-select>
                                   <v-text-field name="input-1" label="Extension" color="primary" v-model="model.duplicator" required readonly dense
                                     id="testing" style="margin: 0.5em;"></v-text-field>
                                   <v-text-field name="input-1" label="Next Of Kin National ID" color="primary" v-model="model.nok_national_id" required readonly dense
@@ -1279,11 +1279,11 @@
         });
       },
 
-      /*sortStr: function () {
+      sortStr: function () {
         return this.sstreets.slice().sort(function (a, b) {
           return a.nom_CALLE > b.nom_CALLE ? 1 : -1;
         });
-      },*/
+      },
 
       showMessage() {
         Swal.fire({
@@ -1476,7 +1476,7 @@
           });
       },
 
-      /*streetName(event) {
+      streetName(event) {
         this.$axios
           .request({
             url:
@@ -1492,7 +1492,7 @@
           .catch((e) => {
             console.log(e);
           });
-      },*/
+      },
 
       register() {
         this.errors = [];
