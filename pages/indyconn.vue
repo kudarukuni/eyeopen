@@ -1497,7 +1497,7 @@
       register() {
         this.errors = [];
         this.success = [];
-        if (this.$refs.form1.validate() & this.$refs.form2.validate() & this.$refs.form3.validate() & this.$refs.form4.validate() & this.$refs.form5.validate() & this.$refs.form6.validate() & this.$refs.form7.validate() & this.$refs.form8.validate() & this.$refs.form9.validate()) {
+        if (this.$refs.form2.validate() & this.$refs.form4.validate() & this.$refs.form8.validate() & this.$refs.form9.validate() & this.$refs.form10.validate()) {
           if (this.results.isValid == true) {
             this.model.standnumber = this.model.standnumber.toUpperCase();
             this.model.gender = this.model.gender.toUpperCase();
