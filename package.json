@@ -10,7 +10,7 @@
     "start": "nuxt start",
     "generate": "nuxt generate",
     "kuda": "yarn build && yarn dev",
-    "deploy": "yarn build && yarn start & cd api/UPLOADPDFAPI && yarn start"
+    "deploy": "yarn build && yarn start"
   },
   "dependencies": {
     "@nuxtjs/auth": "^4.8.1",
